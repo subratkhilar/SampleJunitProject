@@ -1,0 +1,31 @@
+<div ng-controller="LoginCtrl" ng-init="relogin()">
+ <div><img src="image/bg.jpg" class="login-bg" alt=""></div>
+	<div class="logo"></div>
+	
+		<form name="myForm">
+			<div class="login-block">
+			<h1>Login</h1>
+			
+				<!-- <div id="visibility" class=" errorLogin " ng-show="isLogin">
+								<span class=" error ">{{loginError}}</span>
+								
+							</div> -->
+							<div ng-show="submitFailed"  class="errorLogin">
+			 <span class="error"> {{loginError}} </span>
+          	</div>
+				<div class="posRel">
+				<input type="text" value="" placeholder="Username" name= "username" id="username" class="form-control box" ng-model="loginData.username"  />
+				<div class="username"></div>
+				</div>
+				<div class="posRel">
+				<input type="password" value="" placeholder="Password" name="password" id="password" class="form-control box" ng-model="loginData.password"/>
+				<div class="password"></div>
+				</div>
+				<button type="submit" value="Login" ng-disabled="!(myForm.username.$valid && myForm.password.$dirty)" class="btn btn-primary" ng-click="login(loginData)">Login</button>
+				
+			</div>
+			</form>
+		
+
+	
+</div>

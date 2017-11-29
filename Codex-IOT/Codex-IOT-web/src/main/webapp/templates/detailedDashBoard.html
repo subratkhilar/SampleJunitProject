@@ -1,0 +1,101 @@
+<div class="posrel">
+	<div class="detailsDashBoard">
+	<div ng-include="'templates/HeaderNavigationBar.html'"></div>
+    <!-- Nav ends here -->
+	<section>
+		<div id="detailed_dashboard_background" ng-controller="locationDashBoardCntl">
+			 
+				<div id="detailedDashBoardAnalytics" class="col-md-7">
+					<div class="panel-heading page-heading panel-title">
+						<b>{{locationName.toUpperCase()}} DASHBOARD</b>
+						
+					</div>
+					<div class="panel panel-default">
+						<div id="analyticalPanelHeading" class="panel-heading panel-title">
+								ANALYTICAL REPORT 
+								<a href="#" title="AnalyticalReport" onClick="return false;" class="excel-pointer">
+									<i class="fa fa-file-excel-o fa-12x" aria-hidden="true"></i>
+									EXCEL REPORT
+								</a>
+							
+						</div>
+						
+
+						<div id="analyticalPanelBody" class="panel-body dashBoardAnalytics">
+							<div class="col-md-12">
+				
+								<div ng-include="'templates/analyticalreport.html'"></div>
+																
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<div class="col-md-5">
+					<div class= 'kpisummarypanel' ng-include="'templates/kpiSummaryGuage.html'"></div>
+					<div id="alertsTableInDetialedDashBoard" ng-include="'templates/alertsTableHtml.html'"></div>
+				</div>
+			
+	<div class="row">
+				<div id="reportsStreamingVideoPanel" class="col-md-7">
+					<div class="panel panel-default">
+						<div id="streamingVideoPanelHeading" class="panel-heading panel-title">
+							<nav>STREAMING VIDEO</nav>
+						</div>
+						<div id="streamingVideoPanelBody" class="panel-body">
+							<div class="col-md-6">
+								<video controls>
+									<source src="video/water.mp4" type="video/mp4">
+									<source src="video/water.ogg" type="video/ogg">
+								</video>
+						    </div>
+							<div class="col-md-6">
+								<div class="live_video_streaming">
+									<iframe  src="templates/simpleSubscriber.html" frameBorder="0" scrolling="no">
+        	            				<p>Your browser does not support iframes.</p>
+		    	        			</iframe>
+            					</div>
+							</div>
+						</div>
+					</div>
+	
+					<div id="reportsPanel" class="panel panel-default">
+						<div id="reportsPanelHeading" class="panel-heading panel-title">
+							<nav>REPORTS 
+							<a href="#" title="Excelreport" onClick="return false;">
+								<select class="selectpicker selectboxdetaildashboard"> 
+										<option>Reports</option>
+										<option>Report 1</option>
+										<option>Report 2</option>
+								</select> 
+								<i class="fa fa-file-excel-o fa-12x" aria-hidden="true"></i>EXCEL	REPORT
+							</a>
+							</nav>
+						</div>
+						<div class="panel-body" ng-controller="reportCtrl" id="detailed_dashboard_page_reports">
+                            <nvd3 options="options" data="data" showYAxis="false"></nvd3> 
+                        </div>
+					</div>
+				</div>
+				
+				<div class="col-md-5">
+					<div id="siteDetailsPanel" class="panel panel-default">
+						<div class="panel-heading panel-title">SITE DETAILS</div>
+						<div ng-include="'templates/siteDetails.html'"></div>
+					</div>
+					<div id="weatherForecastPanel" class="panel panel-default">
+						<div class="panel-heading panel-title">	WEATHER FORECAST </div>
+						<div class="panel-body"><div ng-include="'templates/weatherForecast.html'"></div></div>
+					</div>
+				</div>
+				</div>
+			
+			</div>
+		
+	</section> 
+	</div>
+	<!-- Footer starts here -->
+	<footer class="footer-basic-centered">
+		<p>Copyright &copy; 2017 Atos</p>
+	</footer>
+</div>

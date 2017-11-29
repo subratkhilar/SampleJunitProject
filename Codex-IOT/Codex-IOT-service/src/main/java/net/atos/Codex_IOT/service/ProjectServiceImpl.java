@@ -1,0 +1,113 @@
+package net.atos.Codex_IOT.service;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import net.atos.Codex_IOT.dao.DashboardDao;
+import net.atos.Codex_IOT.dao.ProjectDao;
+import net.atos.Codex_IOT.mapper.Mapper;
+import net.atos.Codex_IOT.model.ProjectDto;
+import net.atos.Codex_IOT.pojo.Project;
+import net.atos.Codex_IOT.pojo.ProjectMapping;
+import net.atos.Codex_IOT.pojo.Sensor;
+import net.atos.Codex_IOT.pojo.User;
+
+@Transactional
+@Service
+public class ProjectServiceImpl implements ProjectService{
+
+	
+	@Autowired
+	ProjectDao dao;
+	
+	@Autowired
+	DashboardDao dashboardDao;
+	
+	@Autowired
+	Mapper mapper;
+	
+	@Override
+	public void save(Project p) {
+	
+		dao.saveProject(p);
+		
+	}
+
+	@Override
+	public void update(Project p) {
+		
+		dao.updateProject(p);
+		
+	}
+	
+	@Override
+	public void delete(String id) {
+		
+		dao.deleteProject(id);
+		
+	}
+	
+	@Override
+	public List<Project> get(){
+		
+		
+		return dao.findAll();
+	}
+	
+	@Override
+	public Project findProjectById(String id){
+		
+		return dao.findProjectById(id);
+		
+	}
+	
+	
+	@Override
+	public List<Project> findByCustomerId(long id){
+		
+		return dao.findByCustomerId(id);
+	}
+	
+	@Override
+	public List<Project> findAllByCustomerId(long id){
+		return dao.findAllByCustomerId(id);
+	}
+
+	@Override
+	public ProjectDto findProjectDetails(String projectId){
+		
+		Project project = dao.findProjectById(projectId);
+		if (null==project){
+			throw new RuntimeException("Id not found");
+		}
+		
+		ProjectDto projectDto=mapper.mapProjectToProjectDto(project);
+		projectDto.setNoOfAssets(dashboardDao.getNoOfAssetsForProject(projectId));
+		projectDto.setNoOfSensors(dashboardDao.getNoOfSensorsForProject(projectId));
+		return projectDto;
+	}
+
+	@Override
+	public void updateProjectActiveState(String projectId) {
+		Project project=dao.findProjectById(projectId);
+		if (project.isActive()){
+			project.setActive(false);
+			
+		}
+		else {
+			project.setActive(true);
+		}
+		project.setUpdatedDate(new Date());
+		dao.updateProject(project);
+		
+	}
+
+	
+	
+
+}

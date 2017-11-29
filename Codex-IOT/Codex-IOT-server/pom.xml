@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>net.atos</groupId>
+		<artifactId>Codex-IOT</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>Codex-IOT-server</artifactId>
+	<name>Codex-IOT-server</name>
+	<packaging>jar</packaging>
+	<properties>
+		<java-version>1.8</java-version>
+	<!-- 	<spring.version>4.2.5.RELEASE</spring.version> -->
+		<org.aspectj-version>1.6.9</org.aspectj-version>
+		<org.slf4j-version>1.5.10</org.slf4j-version>
+		<targetJdk>1.8</targetJdk>
+		<project.root.directory>${basedir}/..</project.root.directory>
+	</properties>
+
+	<build>
+	  <resources>
+		  <resource>
+			<directory>src/main/resources</directory>
+			<filtering>true</filtering>
+		  </resource>
+		</resources>
+		<plugins>
+			<plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <compilerArgument>-Xlint:all</compilerArgument>
+                        <showWarnings>true</showWarnings>
+                        <showDeprecation>true</showDeprecation>
+                    </configuration>
+            </plugin>
+            <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-dependency-plugin</artifactId>
+		        <executions>
+		          <execution>
+		          <phase>package</phase>
+		            <id>unpack</id>
+		            <goals>
+		              <goal>unpack</goal>
+		            </goals>
+		            <configuration>
+		              <artifactItems>
+		                <artifactItem>
+		                  <groupId>org.apache.tomcat</groupId>
+		                  <artifactId>tomcat</artifactId>
+		                  <version>8.0.32</version>
+		                  <type>zip</type>
+		                  <overWrite>true</overWrite>
+
+		                  <outputDirectory>${project.build.directory}</outputDirectory>
+		                </artifactItem>
+		              </artifactItems>
+		            </configuration>
+		          </execution>
+		        </executions>
+	      </plugin>
+            
+		</plugins>
+	</build>
+</project>

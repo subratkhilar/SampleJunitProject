@@ -1,0 +1,74 @@
+<div class="headerNavigationBar" ng-controller="siteSelectorCtrl" >
+<header class="cd-main-header">
+
+
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+		<a href="#" title="Atos"><img class="rdd-img-responsive"
+			src="image/atos-logo.png" alt="Atos"></a>
+			<!--  <a href="#"
+			class="cd-nav-trigger">Menu<span></span></a>
+		<nav class="cd-nav">
+			<ul class="cd-top-nav">
+				<li class="has-children account"><img
+					src="image/cd-avatar.png" alt="avatar"> Welcome,
+					{{logCreds.firstName}} |</li>
+					  
+			</ul>
+			
+		</nav>  -->
+		
+		<div ng-controller="LoginCtrl" > 
+					  <button type="button"  style="float: right" class="btn btn-primary" ng-click="logout()">Logout</button> 
+					</div>
+	
+	</header>
+	<!-- header ends here-->
+	<!-- Nav starts here -->
+	<main class="cd-main-content">
+	<nav class="cd-side-nav"></nav>
+	<nav class="wrap">
+	<div ng-controller="AuthCtrl" > 
+		<ul class="menu">
+			<li><a href="#/welcome"><i class="fa fa-home fa-12x"></i>Dashboard</a></li>
+			
+			<div ng-if="IsBusinessUser()">
+			<li><a href="#/welcome/reports"><i class="fa fa-bar-chart fa-12x" aria-hidden="true"></i> Reports</a></li>
+			</div>
+			
+			<li><a href="#"><i	class="fa fa-tint fa-12x" aria-hidden="true"></i> Site<i
+			class="fa fa-angle-down fa-12x" aria-hidden="true"></i></a>			<ul class="siteDamLocations">
+                    <li  ng-repeat="siteLocations in data | limitTo: 5"><a href="#/welcome/detailedDashBoard">{{siteLocations.locationName}}</a></li>
+                </ul></li>
+                
+			
+			<li><a href="#/welcome/alerts"><i class="fa fa-exclamation-triangle fa-12x" aria-hidden="true"></i>Project Configuration</a></li>
+		
+			<div ng-if="IsAdmin()">
+			<li><a href="#/welcome/reports"  ><i class="fa fa-bar-chart fa-12x" aria-hidden="true"></i> Asset Configuration</a></li>
+			</div>
+			
+			<div ng-if="IsUser()">
+			<li><a href="#/welcome/reports"><i class="fa fa-bar-chart fa-12x" aria-hidden="true"></i> Sensor Configuration</a></li>
+			</div>
+		</ul>
+	</div>
+		<div class="clearfix"></div>
+	</nav>	
+</main>
+
+
+
+
+	<!-- <div class="icon-bar">
+  <a class="active" href="#"><i class="fa fa-home"></i></a> 
+  <a href="#"><i class="fa fa-search"></i></a> 
+  <a href="#"><i class="fa fa-envelope"></i></a> 
+  <a href="#"><i class="fa fa-globe"></i></a>
+  <a href="#"><i class="fa fa-trash"></i></a> 
+</div>
+</div> -->
+<script >
+
+</script>
+
+	

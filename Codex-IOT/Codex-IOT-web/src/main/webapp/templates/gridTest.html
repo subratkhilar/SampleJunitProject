@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://ui-grid.info/release/ui-grid.css" type="text/css">
+	
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="../css/workflow.css">
+<script src="../node_modules/angular/angular.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="http://ui-grid.info/release/ui-grid.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="../Controller/workflowapp.js"></script>
+<script src="../Controller/alertworkflowController.js"></script>
+<script src="../Controller/notificationController.js"></script>
+<script src="../Controller/workflowListController.js"></script>
+</head>
+<body ng-app="Myapp" ng-controller="uigridCtrl">
+	<table id="j_table" class="display" cellspacing="0" width="100%">
+
+
+		<thead>
+
+			<tr class="table_css">
+				<th>ALL PROJECT</th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+
+			</tr>
+
+
+
+			<tr class="heading_for_table">
+				<th>created date</th>
+				<th>workflow ID</th>
+				<th>workFlow Type</th>
+				<th>Min Threshold</th>
+				<th>Max Threshold</th>
+				<th>NoOfOfOccurences</th>
+				<th>LinkedSensors</th>
+				<th>LinkedProject</th>
+				<th>LinkedAsset</th>
+				<th>Status</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+{{getworkflowName}}
+
+<h1 ng-repeat="x in WorkflowDetails">{{x}}</h1>
+		<tbody>
+			<tr
+				ng-repeat=" workflow_data in  WorkflowDetails ">
+				<td>{{workflow_data.createdDate | date:'dd-MM-yyyy'}}</td>
+				<td>{{workflow_data.workflowId}}</td>
+				<td>{{workflow_data.eventType}}</td>
+				<td>{{workflow_data.lowerLimit}}</td>
+				<td>{{workflow_data.upperLimit}}</td>
+				<td>{{workflow_data.noOfOccurrences}}</td>
+				<td>{{workflow_data.sensorId}}</td>
+				<td>{{workflow_data.projectId}}</td>
+				<td>{{workflow_data.projectId}}</td>
+				<td>{{workflow_data.active}}</td>
+				
+				<td><div class="floatR  toggle-margin">
+						<span style="padding: 2px 7px 0 0;" data-toggle="modal"
+							data-target="#centralModalSm_for_editProject"
+							ng-click="edit_button(project_json_data)"> <i
+							class="fa  fa-edit font25 color14 edit"></i>
+						</span> <span ng-click="delete_button1(project_json_data)"><i
+							class="fa  fa-trash-o font25 color7 trash"
+							data-target="#model_for_confirm_delete" data-toggle="modal"></i></span>
+					</div></td>
+			</tr>
+
+
+
+		</tbody>
+	</table>
+
+
+
+	</div>
+	<br>
+</body>
+</html>

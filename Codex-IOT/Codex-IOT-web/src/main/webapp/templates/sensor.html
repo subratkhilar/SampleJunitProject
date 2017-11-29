@@ -1,0 +1,329 @@
+
+<div ng-include="'templates/header.html'" ng-init="sensor_detail()"></div>
+<div id="page-content-wrapper">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="page-title color1 font27">Sensor Configuration</div>
+
+				<!-- seelect tag start from here -->
+
+<div style="text-align:center;">
+  <br/>
+  <div class="select_join" style="margin-left:15px">
+   Select Project by : <select name="select_part" id="mySelect" ng-model="selected_project_id" ng-options="project as project.projectId for project in project_details">  <option value="0" >ID</option> <option Value="project.projectId"></option>
+                </select>
+
+            <select name="select_part" id="mySelect" ng-model="selected_project_name" ng-options="project as project.projectName for project in project_details"><option Value="project.projectName">NAME</option>
+                </select>
+
+            <select name="select_part" id="mySelect" ng-model="selected_project_location" ng-options="project as project.projectLocation for project in project_details"><option Vlaue="project.projectLocation">LOCATION</option>
+                </select>
+
+            <select name="select_part" id="mySelect" ng-model="selected_project_status" ng-options="project as project.active for project in project_details"><option Value="project.active">STATUS</option>
+                </select>
+            <br>
+    
+
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+			<!-- 	<div id="search_by" align="middle" style="height:150px; text-align:center;">
+			Select Project by : <select name="mySelect"   id="mySelect" ng-model="selected_project_id" ng-options="project as project.projectId for project in project_details"  required>  <option value="0" >ID</option> <option Value="project.projectId"></option>
+				</select>
+
+			<select name="mySelect" id="mySelect" ng-model="selected_project_name" ng-options="project as project.projectName for project in project_details"><option Value="project.projectName">NAME</option>
+				</select>
+
+			<select name="mySelect" id="mySelect" ng-model="selected_project_location" ng-options="project as project.projectLocation for project in project_details"><option Vlaue="project.projectLocation">LOCATION</option>
+				</select>
+
+			<select name="mySelect" id="mySelect" ng-model="selected_project_status" ng-options="project as project.active for project in project_details"><option Value="project.active">STATUS</option>
+				</select>
+			<br>
+		</div> -->
+
+		<!-- seelect tag end here -->
+
+
+
+<!-- table content from here -->
+
+
+
+
+				<div id="table-part" > 
+				<script>$(document).ready(function(){
+    $('#j_table').DataTable({"bLengthChange": false,"bFilter": false
+});
+});</script>
+
+
+<button  class="btn btn-primary" data-toggle="modal" data-target="#centralModalSm_for_addasset" data-whatever="@mdo" style="background-color:#9E9500;"> +Add Project</button>
+
+
+
+
+
+
+   <!-- Central Modal for add_project --> 
+    
+    <div class="modal fade" id="centralModalSm_for_addProject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true " ng-controller="config_controller">
+    <div class="modal-dialog modal-lg" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <h4 class="modal-title w-100" id="myModalLabel">Add Project</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+             <div class="md-form">
+
+  Project ID: <input type="text" class="input-alternate" id="usr"  align="left" ng-model="projectId" placeholder="Project ID" > </input>
+  </div>
+   <div class="md-form">Project Name:
+  <input type="text" class="input-alternate" id="usr" align="left"  ng-model="projectName" placeholder="Project Name"> </input>
+  </div>
+  <div class="md-form">Project  Location:
+  <input type="text" class="input-alternate" id="usr"  align="left"  ng-model="projectLocation" placeholder="Project  Location"> </input>
+  </div>
+  <div class="md-form">Project Description:
+  <input type="text" class="input-alternate" id="usr"  align="left" ng-model="projectDescription" placeholder="Project Description"> </input>
+</div>
+
+<div class="md-form">Latitude:
+  <input type="text" class="input-alternate" id="usr"  align="left" ng-model="latitude" placeholder="Latitude"> </input>
+</div>
+<div class="md-form">Longitude:
+  <input type="text" class="input-alternate" id="usr"  align="left" ng-model="longitude1" placeholder="Longitude"> </input>
+</div>
+
+ </div>
+            <!--Footer-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary" data-target="#centralModalSuccess" data-whatever="@mdo"data-toggle="modal" data-dismiss="modal" ng-click=" pass_data()" >Add</button>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Modal -->
+
+<div class="wrap" align="right" class="search_bar">
+			<div class="search">
+				<input type="text" ng-model="search_by_text" class="searchTerm" placeholder="search project">
+				
+			</div>
+		</div>
+
+
+ <!-- Central Modal for Edit_project --> 
+   
+    <div class="modal fade" id="centralModalSm_for_editProject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true " >
+    <div class="modal-dialog modal-lg" role="document">
+        <!--Content-->
+<!-- 
+        <form ng-controller="config_controller" ng-submit="pass_edited_data(projectId,projectName1,projectLocation1,projectDescription1,latitude1,longitude1)"> -->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <h4 class="modal-title w-100" id="myModalLabel">Edit Project </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+
+
+
+
+
+            <div class="modal-body">
+             <div class="md-form">
+
+
+  Project ID: <input type="text" class="input-alternate" id="project_detail_modal_edit1"  align="left" ng-model="a.projectId22"  placeholder="Project ID" > </input>
+  </div>
+   <div class="md-form">Project Name:
+  <input type="text" class="input-alternate" id="project_detail_modal_edit2" align="left"  ng-model="a.projectName1"  ng-value="project_edited_name" placeholder="Project Name"> </input>
+  </div>
+  <div class="md-form">Project  Location:
+  <input type="text" class="input-alternate" id="project_detail_modal_edit3"  align="left"  ng-model="a.projectLocation1" ng-value="project_edited_location"  placeholder="Project  Location"> </input>
+  </div>
+  <div class="md-form">Project Description:
+  <input type="text" class="input-alternate" id="project_detail_modal_edit4"  align="left" ng-model="a.projectDescription1" ng-value="project_edited_description" placeholder="Project Description"> </input>
+</div>
+
+<div class="md-form">Longitude:
+  <input type="text" class="input-alternate" id="project_detail_modal_edit5"  align="left" ng-model="a.longitude1" ng-value="project_edited_longitude" placeholder="Longitude"> </input>
+</div>
+<div class="md-form">Latitude:
+  <input type="text" class="input-alternate" id="project_detail_modal_edit6"  align="left" ng-model="a.latitude1"  ng-value="project_edited_latitude" placeholder="Latitude"> </input>
+</div>
+
+ </div>
+
+
+            <!--Footer-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary" data-target="#centralModalSuccess" data-whatever="@mdo"data-toggle="modal" data-dismiss="modal" ng-click="pass_edited_data(a)">Update</button>
+            </div>
+        </div>
+
+        <!--/.Content-->
+    </div>
+</div>
+
+<!-- Modal -->
+
+
+
+
+<div class="modal fade" id="model_for_confirm_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-success" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+          <!--  <div class="modal-header">
+                <p class="heading lead">Modal Success</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+            -->
+
+            <!--Body-->
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fa  fa-trash-o font25 color7 trash "></i>
+                    <!--<i class="fa fa-check-circle" ></i> -->
+                    <p><strong>Are you sure want to delete Project Name </strong></p>
+                </div>
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+               <!-- <a type="button" class="btn btn-primary-modal">Get it now <i class="fa fa-diamond ml-1"></i></a> -->
+               <a type="submit" class="btn btn-primary" data-dismiss="modal">No</a>
+                <a type="submit" class="btn btn-primary" data-dismiss="modal" ng-click="delete_button()" >Yes</a>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Central Modal Medium Success-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table id="j_table" class="display" cellspacing="0" width="100%">
+
+   
+    <thead>
+
+ 		<tr class="table_css" >
+            <th>ALL PROJECT</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            
+        </tr>
+
+
+
+        <tr class="heading_for_table">
+            <th>Date</th>
+            <th>Sensor ID</th>
+            <th>SensorName</th>
+            <th>Sensor Location</th>
+            <th>Sensor Description</th>
+            <th>Status</th>
+            <th>Linked Project</th>
+            <th>Linked Asset</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+   
+    <tbody>
+        <tr ng-repeat="sensor_json_data in  sensor_details">
+            <td>{{sensor_json_data.createdDate | date:'dd-MM-yyyy'}}</td>
+            <td>{{sensor_json_data.sensorId}}</td>
+            <td>{{sensor_json_data.sensorsName}}</td>
+            <td>Sensor_Address</td>
+            <td>{{sensor_json_data.sensorDescription}}</td>
+            <td>STATUS</td>
+            <td>Linked Project</td> 
+            <td>Linked Asset</td>
+            <td><div class="floatR  toggle-margin">
+					 				     <span style="padding:2px 7px 0  0;" data-toggle="modal"  data-target="#centralModalSm_for_editProject"  ng-click="edit_button(project_json_data)"> <i class="fa  fa-edit font25 color14 edit" ></i> </span>
+								  		 <span ng-click="delete_button1(project_json_data)"><i class="fa  fa-trash-o font25 color7 trash" data-target="#model_for_confirm_delete" data-toggle="modal"  ></i></span>
+					 				   </div></td>        </tr>
+
+
+
+    </tbody>
+</table>
+
+
+
+				</div>
+                <br>
+
+<!-- table content end here -->
+
+
+
+
+			</div>
+		</div>
+		</div>
+        <br>
+<!-- /#page-content-wrapper -->
+	<div ng-include="'templates/footer.html'"></div>
+</div>

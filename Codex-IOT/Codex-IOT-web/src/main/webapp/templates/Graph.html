@@ -1,0 +1,240 @@
+<div ng-include="'templates/header.html'" ng-init="initReports()" >
+</div>
+<div id="page-content-wrapper">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="page-title color1 font27">Reports</div>
+
+				<br>
+				<div id="table-part">
+					<script>
+					  $(document).ready(function () {
+                            $('#j_table').DataTable({
+                            	 "bLengthChange": false
+                            	
+                            });
+                        });
+                    </script>
+
+				
+						
+							
+						
+					
+					
+					<!-- Central Modal Medium Success-->
+					<div class="modal fade" id="model_for_graph" tabindex="-1"
+						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-cold-dialog-msg modal-notify modal-success"
+							role="document">
+							<!--Content-->
+							<div class="modal-content">
+								
+
+								<!--Body-->
+								<div class="modal-cold-body">
+								
+								 
+								
+								
+								
+								
+								<md-content>
+							
+            <md-datepicker ng-model = "myDate" ng-change="myFunc(myDate)" md-placeholder = "Enter date"></md-datepicker>
+								</md-content>
+								
+								  <span us-spinner="{radius:17, width:6, length: 10}" spinner-key="spinner-1"></span>
+								 <canvas id="bar" 
+			class="chart chart-line" 
+			chart-data="colddatagraph.data" 
+			chart-labels="colddatagraph.labels"  
+			chart-dataset-override="datasetOverride" 
+			chart-options="colddatagraph.options"
+			chart-click="onClick"
+			chart="myColdDataChart"
+			chart-type="spline"
+			legend="true"
+			style="height: 200px;width:500px;">
+			
+	
+		</canvas>
+								</div>
+
+								<!--Footer-->
+								<div class="form-group textcenter">
+									 <a type="submit" class="btn btn-primary no"
+										data-dismiss="modal" ng-click="delete_button()"
+										data-whatever="@mdo" data-toggle="modal"
+										data-target="#centralModalSuccess_for_delete">Close</a>
+										<div class="clear"></div>
+								</div>
+
+							</div>
+							<!--/.Content-->
+						</div>
+					</div>
+					
+
+
+
+
+
+					
+					
+			
+
+		
+					<div class="modal fade" id="model_for_hot_graph" tabindex="-1"
+						role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog-msg modal-notify modal-success"
+							role="document">
+							<!--Content-->
+							<div class="modal-content">
+								
+
+								<!--Body-->
+								<div class="modal-body">
+									<canvas id="bar" 
+			class="chart chart-line" 
+			chart-data="hotdatagraph.data" 
+			chart-labels="hotdatagraph.labels"  
+			chart-dataset-override="datasetOverride" 
+			chart-options="hotdatagraph.options"
+			chart-click="onClick"
+			chart="myChart"
+			chart-type="spline"
+			style="height: 200px;width:572pxpx;">
+</canvas> 
+								</div>
+
+								<!--Footer-->
+								<div class="form-group textcenter">
+									 <a type="submit" class="btn btn-primary no"
+										data-dismiss="modal" ng-click="delete_button()"
+										data-whatever="@mdo" data-toggle="modal"
+										data-target="#centralModalSuccess_for_delete">Close</a>
+										<div class="clear"></div>
+								</div>
+
+							</div>
+							<!--/.Content-->
+						</div>
+					</div>
+
+
+					<div class="table-responsive marginTS">
+
+					
+ 	                    <table id="j_table" datatable="ng" class="display font14"
+							style="background-color: #fff !important;" cellspacing="0"
+							width="100%">
+
+
+							<thead>
+								<tr class="css_for_th font22">
+
+							<td colspan="7">All Reports</td>
+
+						</tr>
+								<tr>
+									<th>SensorID</th>
+									<th>Asset ID</th>
+									<th>Sensor Value 1</th>
+									<th>Sensor Value 2</th>
+									<th>Sensor Value 3</th>									
+									<th>Live Graph</th>
+									<th>Cold Data</th>
+
+							<tbody>
+								<tr ng-repeat=" report_json_data in  report_details | filter:search_by_text "
+									>
+																	
+									<td>{{report_json_data.sensorId}}</td>
+									<td>{{report_json_data.assetId}}</td>
+									<td>{{report_json_data.sensorValue[0]}}</td>
+									<td>{{report_json_data.sensorValue[1]}}</td>
+									<td>{{report_json_data.sensorValue[2]}}</td>
+									
+									
+									 
+									   <td>
+									
+									<div ng-if="report_json_data.sensorId=='sensor_id2'">
+										<canvas id="bar" 
+										class="chart chart-line" 
+										chart-data="hotdatagraph2.data" 
+			chart-labels="hotdatagraph2.labels"  
+			chart-dataset-override="datasetOverride" 
+			chart-options="hotdatagraph3.options"
+			chart-click="onClick"
+			chart="myChart1"
+			chart-type="spline"
+			style="height: 200px;width:572pxpx;">
+									</canvas> 
+									</div>
+									
+									<div ng-if="report_json_data.sensorId=='sensor_id1'">
+										<canvas id="bar" 
+										class="chart chart-line" 
+										chart-data="hotdatagraph1.data" 
+			chart-labels="hotdatagraph1.labels"  
+			chart-dataset-override="datasetOverride" 
+			chart-options="hotdatagraph3.options"
+			chart-click="onClick"
+			chart="myChart2"
+			chart-type="spline"
+			style="height: 200px;width:572pxpx;">
+									</canvas> 
+									</div>
+									
+									<div ng-if="report_json_data.sensorId=='sensor_id3'">
+										<canvas id="bar" 
+										class="chart chart-line" 
+										chart-data="hotdatagraph3.data" 
+			chart-labels="hotdatagraph3.labels"  
+			chart-dataset-override="datasetOverride" 
+			chart-options="hotdatagraph3.options"
+			chart-click="onClick"
+			chart="myChart2"
+			chart-type="spline"
+			style="height: 200px;width:572pxpx;">
+									</canvas> 
+									</div>
+									</td>
+										
+
+							
+									
+									
+									<td>
+										
+										<div class="floatR  toggle-margin" >
+											<span ng-click="cold_data_graph(report_json_data.sensorId)"><i
+												class="fa  fa-line-chart font25 color1 trash"
+												data-target="#model_for_graph" data-toggle="modal"></i></span>
+										</div> 
+									</td>
+								</tr>
+
+
+
+							</tbody>
+						</table>
+ 
+ 
+					</div>
+
+				</div>
+
+				<!-- table content end here -->
+
+			</div>
+			</div>
+			</div>
+		
+	<br>
+	<!-- /#page-content-wrapper -->
+	<div ng-include="'templates/footer.html'"></div>
+</div>

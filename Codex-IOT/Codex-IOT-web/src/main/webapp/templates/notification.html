@@ -1,0 +1,229 @@
+<div class="container" ng-controller="WorkflowCtrls">
+	<!-- Trigger the modal with a button -->
+		<button type="button" class="btn btn-primary addworkflow" data-toggle="modal"
+			data-target="#myModal1" data-backdrop="static" data-keyboard="false" >+ Notification WorkFlow</button>
+		<!-- Modal -->
+		<div class="modal fade" id="myModal1" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title color1 font22">
+							Notification WorkFlow
+						</h4>
+					</div>
+					<div class="modal-body" style="height: 550px;">
+				<div class="topHelp">click on <span class="helpArrowHeight">&#8595;&#8594; </span> to move to next step</div>
+					
+			<div ng-show="showError"  class="errorLogin">
+			 <span class="error"> {{errorMessageNotification}} </span>
+          	</div> 
+					
+		<div class="iotwfcontainer">	
+		<!-- Start div starts here -->
+		<form name="myForm">
+
+			<div id="startoval" >
+				<div class="color4 font16">Start</div>	
+			</div>			
+		<!-- Start div ends here -->
+		
+		<!-- Start arrow starts here -->
+				<div class="arrowheight cursor">
+				<div class="arrow" ng-click="toggeleProjectProcess();" >
+					<span>&#8595;</span>
+				</div>
+				</div>
+						<div id="coachMarks">
+							<div  id="coachMarksMsg" class="color1" ng-show="showHelp">{{helpMessage}}
+						<div class="helpArrow" > <i class="fa fa-long-arrow-right fa-3x " ng-click="helpArrow();"aria-hidden="true"></i> </div>
+						
+							
+
+						
+							</div>
+							
+							<div class="quewrap" title="help"><i class="fa fa-question-circle que" ng-click="toggleHelp();" aria-hidden="true"></i></div>
+							</div>
+		<!-- Start arrow ends here -->
+		
+		<!-- Select project div starts here -->
+			<div id="process_proj" class="floatL" ng-show="hideProject">
+					<div class="color4 font16" >Select Project</div>
+				<div> 
+				
+					<select name="project_id" id="dropdown" ng-model="projectID" class="Sitedropdown"  ng-change="onchangeAsset();" ng-options="project.projectID as project.projectName for project in projectsNotification"  required> 
+     				 <option value="">Select project</option> 
+   					 </select> 
+   					 
+  
+  </div>
+			</div>
+		<!-- Select project div ends here -->
+				
+		<!-- Select project arrow ends here -->
+		<div class="arrowwidth1 floatL cursor" ng-show="hideProject"  >
+		<div class="arrow1" ng-click="toggeleAssetProcess();" > 
+					<span align="center" text="next" >&#8594;</span>
+				</div>	
+							
+				</div>
+		<!-- Select project arrow ends here -->
+		
+		<!-- Select assets div starts here -->
+			<div id="process_assets" class="floatL" ng-show="hideAsset">
+					<div class="color4 font16">Select Asset</div>
+				<div >
+					<select name="asset_id" id="dropdown" ng-model="assetID" class="Sitedropdown" ng-options="asset.assetID as asset.assetName for asset in assetsNotification"  ng-change="onChangeSensor();" required> 
+     				 <option value="">Select asset</option> 
+   					 </select> 
+   					 </div>
+			</div>
+		<!-- Select assets div ends here -->
+		
+
+		<div class="arrowwidth1 floatL cursor" ng-show="hideAsset" >
+				<div class="arrow1" ng-click="toggleSensorProcess();">
+					<span align="center" text="next" >&#8594;</span>
+				</div>			
+				</div>
+		<!-- Select assets arrow ends here -->
+		<!-- Select sensor div starts here -->
+			<div class="iotwfcontainer">
+			<div id="process_sensor" class="floatL"  ng-show="hideSensor">
+					<div class="color4 font16">Select Sensor</div>
+				<div> 
+					<select name="sensor_id"  id="dropdown" ng-model="sensorID" ng-change="onChanges();" class="Sitedropdown"  ng-options="sensor.sensorID as sensor.sensorName for sensor in sensorsNotification"  required> 
+     				 <option value="">Select Sensor</option> 
+   					 </select> 
+   				</div>
+			</div>
+			<!-- Select sensor arrow ends here -->
+			<div class="arrowheight cursor" ng-show="hideSensor" >
+				<div class="arrow2" ng-click="toggleDiamond();">
+					<span>&#8595;</span>
+				</div>
+				</div>
+				<div class="whitepatch"></div>	
+				<div class="blackline" ng-show="hideDiamond"></div>							
+				<div class="arrowheight">
+				<div class="arrow3" ng-show="hideDiamond">
+					<span>&#8595;</span>
+				</div>
+				</div>
+				</div>
+		<!-- Select sensor arrow ends here -->
+		
+		<!-- Select sensor div ends here -->
+		
+		<div class="iotwfcontainer">
+		<!-- Enter Temp less div starts here -->		
+		<div id="diamond" ng-show="hideDiamond">
+		<div id="diamondcontent">
+			<div class="color4 font16">Min Threshold</div>
+			<div><input type="number" id="dropdown" name="defaultProject" placeholder="<=" ng-model="tempMin" min="0" required></div>
+		</div>		
+	</div>
+	<!-- Enter Temp less div ends here -->
+	<div class="blackline1" ng-show="hideDiamond"></div>	
+	<div class="blackline2" ng-show="hideDiamond"></div>	
+	<div class="blackline3" ng-show="hideDiamond"></div>	
+	<!-- Enter Temp higher div starts here -->		
+		<div id="diamond1" ng-show="hideDiamond">
+		<div id="diamondcontent">
+			<div class="color4 font16">Max Threshold</div>
+			<div><input type="number" id="dropdown" name="defaultProject" min="0" placeholder=">=" ng-model="tempMax" required></div>
+		</div>			
+	</div>
+	<!-- Select assets arrow ends here -->
+		<div class="arrowwidth floatL cursor" ng-show="hideDiamond" ng-click="toggleNotification();">
+				<div class="arrow4">
+					<span align="center" text="next">&#8594;</span>
+				</div>				
+				</div>
+		<!-- Select assets arrow ends here -->
+	<!-- Enter Temp higher div ends here -->	
+	
+	<!-- Select Notification type div starts here -->
+			<div id="process_Notitype" class="floatL" ng-show="hideNotification">
+					<div class="color4 font16">Notification Type</div>
+				<div>
+					<select id="dropdown" ng-model="notification" required> 
+     				 <option value="">Select notification</option> 
+     				 <option>Push Notification</option>
+     				
+   					 </select> 
+   				
+</div>
+			</div>
+		<!-- Select Notification type div ends here -->
+		
+		<!-- Select assets arrow ends here -->
+		<div class="arrowwidth floatL cursor" ng-show="hideNotification" ng-click="toggleEnd(); ">
+				<div class="arrow5">
+					<span align="center" text="next">&#8594;</span>
+				</div>				
+				</div>					
+			<div id="endoval" ng-show="hideEnd" ng-click="getAllInformation();">
+				<div class="color4 font16">End</div>	
+			</div>			
+		<!-- End div ends here -->
+	
+		</div>
+		
+			</div>
+
+					</div>
+					<div class="form-group wrkwrap">			 
+			  <button type="button" class="btn btn-secondary wrkcancel" data-dismiss="modal" ng-click="reloadPage();">Close</button>
+                <button type="submit" class="btn btn-primary wrkok" ng-click="getAllInformationNotification()" ng-disabled="myForm.$invalid" >Save</button>     
+			<div class="clear"></div>
+			</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+	
+	
+<div class="modal fade" id="centralModalSuccess_for_add_Notification" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+	ng-controller="WorkflowCtrls">
+	<div class="modal-dialog-msg modal-notify modal-success"
+		role="document">
+		<!--Content-->
+		<div class="modal-content">
+			<!--Header-->
+			<!--  <div class="modal-header">
+                <p class="heading lead">Modal Success</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+            -->
+
+			<!--Body-->
+			<div class="modal-body">
+				<div class="text-center">
+					<i class="fa fa-check-circle fa-4x mb-3 animated color14"></i>
+					<!--<i class="fa fa-check-circle" ></i> -->
+					<p class="font16 successmsg">Notification Workflow Added Successfully.</p>
+				</div>
+			</div>
+
+			<!--Footer-->
+			<div class="okbtn">
+				<!-- <a type="button" class="btn btn-primary-modal">Get it now <i class="fa fa-diamond ml-1"></i></a> -->
+				<a type="button" class="btn" data-dismiss="modal"
+					ng-click=" reloadPage()">Ok</a>
+
+			</div>
+		</div>
+		<!--/.Content-->
+	</div>
+</div>
+	

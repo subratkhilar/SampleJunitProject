@@ -1,0 +1,59 @@
+<div class="posrel">
+	<div ng-include="'templates/HeaderNavigationBar.html'"></div>
+
+    <!-- Nav ends here -->
+    <div id="alert_view_background">
+    <div class="panel-title">
+       
+            <h4 class="header-alert">ALERTS</h4>
+            <div class="select-style">
+            </div>
+      
+    </div>
+
+    <div ng-app="formvalid" id="sysytemAlertsData">
+        <div class="panel" data-ng-controller="sysalertCtrl">
+            <div class="panel-body">
+                <table datatable="ng" dt-options="dtOptions" class="table table-hover alertsTableData">
+                    <thead>
+                        <tr>
+                            <td class="css">ALERTS FOR ALL SITES</td>
+                            <td class="css"></td>
+                            <td class="css"></td>
+                            <td class="css"></td>
+                            <td class="css"></td>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <th>Site</th>
+                            <th>Type</th>
+                            <th>Severity</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <div align="center">
+                        <tbody >
+                            <tr ng-repeat="NO in notifications" class="alert_table">
+                                <td>{{ NO.date | date:'dd-MM-yyyy' }}</td>
+                                <td>{{ NO.siteId }}</td>
+                                <td>{{ NO.type }}</td>
+                                <td ng-if="NO.severity=='Medium'" class="css medium"">{{ NO.severity }}</td>
+                                <td ng-if="NO.severity=='Low'" class="css low"">{{ NO.severity }}</td>
+                                <td ng-if="NO.severity=='High'" class="css high"">{{ NO.severity }}</td>
+                                <td ng-if="NO.severity=='Critical'" class="css critical"">{{ NO.severity }}</td>
+                                <td>{{ NO.message }}</td>
+                            </tr>
+                        </tbody>
+                    </div>
+                </table>
+           </div>
+        </div>
+    </div>
+    </div>
+
+<!-- Footer starts here -->
+<footer class="footer-basic-centered">
+    <p>Copyright &copy; 2017 Atos</p>
+</footer>
+</div>
+

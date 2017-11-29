@@ -1,0 +1,315 @@
+.myGrid, .ui-grid-contents-wrapper{
+background-color:white;
+}
+
+@media screen and (min-width: 768px) {
+	.modal-dialog {
+		width: 974px; /* New width for default modal */
+	}
+	.modal-sm {
+		width: 350px; /* New width for small modal */
+	}
+}
+
+#workflows{
+width:1600px;
+height:40px;
+background-color:orange;
+color:white;
+style:bold;
+}
+#startoval, #endoval {
+	width: 123px;
+	height: 43px;
+	background-color:#00a59c;
+	-moz-border-radius: 47px;
+	-webkit-border-radius: 47px;
+	border-radius: 47px;
+	text-align:center;			  
+	color: #000;
+	padding:10px;
+	font-size: 18px;
+	margin:0 0 0 25px;
+}
+#endoval {
+	background-color:#ff0000;
+	left: 778px;
+    position: absolute;
+    top:80px;
+    
+}
+#coachMarks{
+
+}
+
+.waiting {
+    cursor: wait;
+  
+}
+
+#coachMarksMsg{
+	width: 36%;
+	-moz-border-radius: 16px;	
+	-webkit-border-radius : 16px;
+	border-radius:16px;
+	background-color: #f5f5f5;
+	border:2px solid #808080;
+	padding: 10px;
+	position: absolute;
+	right: 48px;
+	top:0;
+	font-size: small;
+	font-style: italic;
+	}
+.helpArrow{
+	color:#000;
+	cursor:pointer;
+	position: relative;
+	z-index: 10;
+	text-align: center;
+	
+}
+.helpArrowHeight{
+font-size:20px;	
+font-weight:bolder;
+color:#000;
+}
+.topHelp{
+font-style: italic;
+    color:#808080;
+    font-size: small;
+    text-align: center;
+}
+.quewrap{
+	position: absolute;
+    right: 10px;
+    top: 0px;
+}
+.que{
+	color:#0066a1;
+	cursor:pointer;
+	font-size:2.5em;
+}
+.editIcon{
+	color:#6639B7;
+	margin-left:3px;
+	font-size:10px;
+}
+#endovalalert {
+		width: 123px;
+	height: 43px;
+	background-color:#00a59c;
+	-moz-border-radius: 47px;
+	-webkit-border-radius: 47px;
+	border-radius: 47px;
+	text-align:center;			  
+	color: #000;
+	padding:10px;
+	font-size: 18px;
+	margin:0 0 0 25px;
+	background-color:#ff0000;
+	left: 786px;
+    position: absolute;
+    top: 199px;
+}
+.wrkcancel, .wrkok{
+	width:49%;
+	margin:0 auto 20px auto;
+	text-align:center;
+	border-radius:0;
+}
+.wrkwrap{
+	margin:0 auto 15px auto;
+	width:334px;
+}
+.wrkcancel, .wrkcancel:hover{
+	background-color:#808080;
+	color:#fff;
+}
+.error{
+	font-size:12px;
+
+}
+
+.iotwfcontainer{
+	position:relative;
+}
+#process_proj, #process_assets, #process_sensor{
+	width: 140px;
+	height: 70px;
+	background-color:#9e9500;
+	-moz-border-radius: 16px;
+	-webkit-border-radius: 16px;
+	border-radius: 16px;
+	text-align:center;			
+	  	position:relative;
+	z-index:1; 
+	color: #000;
+	padding:10px;	
+}
+#process_Notitype, #process_value{	
+	height: 86px;	
+	-moz-border-radius: 16px;
+	-webkit-border-radius: 16px;
+	border-radius: 16px;
+	text-align:center;			  
+	color: #000;
+	padding:10px;	
+}
+#process_assets{
+	background-color:#fa6119;
+}
+#process_sensor{
+	background-color:#0066a1;
+}
+#process_Notitype, #process_value{
+	background-color:#6639b7;
+	width:140px;
+	position: absolute;
+    top: 61px;
+    left: 606px;
+}
+#process_value{
+	left: 799px;
+}
+#dropdown, #diamondcontent input{	
+	color: #808080;	
+	border: none;
+	height:22px;
+	width:100%;
+	margin:5px 0 0 0;
+	padding:0 0 0 5px;
+	font-size:13px;
+}
+#dropdown-temp{
+	color: #808080;	
+	border: none;
+	height:22px;
+	width:100%;
+	margin:5px 0 0 0;
+	padding:0 0 0 5px;
+	font-size:13px;
+	
+}
+
+#diamond, #diamond1 {
+	width: 120px;
+	height: 120px;	
+	margin:0;
+	padding:0;
+	-webkit-transform: rotate( 45deg );
+	-ms-transform: rotate( 45deg );
+	transform: rotate( 45deg );
+	position: relative;	
+	background-color:#4f5257;
+	margin: 50px 0 0 197px;
+	position:absolute;
+	top:-7px;
+	left:-32px;
+}
+#diamond1 {	
+	left:213px;
+}
+#diamondcontent {
+	-webkit-transform: rotate( -45deg );
+	-ms-transform: rotate( -45deg );
+		transform: rotate( -45deg );
+	position: absolute;
+	top: 24%;
+	left:-4%;
+	width: 100%;
+	text-align: center;
+	margin-top: 0;	
+}
+
+/*All arrow starts here*/
+.arrowheight{
+	height:52px;
+	
+}
+.arrowheight1{
+	height:52px;
+}
+/*.arrowwidth{
+	margin:-4px 19px 0 0px;
+}*/
+
+.arrowwidth1{
+	margin:-14px 0 0 -2px;
+	position:relative;
+	z-index:10;
+}
+.arrow, .arrow2, .arrow3, .arrow6{
+    font-size: 60px;
+    color: #000;
+	position:absolute;
+	top:17px;
+	left:72px;
+}
+ .arrow4, .arrow5{
+	font-size: 60px;	
+	color:#000;
+}
+.arrow1{
+	font-size: 60px;	
+	color:#000;	
+}
+
+.arrow2{
+	left: 455px;
+    top: 44px;
+}
+.arrow3{
+	left: 210px;
+    top: 44px;
+}
+.arrow4{
+	left: 553px;
+    top: 53px;
+	position:absolute;
+}
+.arrow5{
+	left: 744px;
+    top: 53px;
+	position:absolute;
+}
+.arrow6{
+	left: 857px;
+    top: 121px;
+	position:absolute;
+}
+.blackline, .blackline1, .blackline2, .blackline3{
+	background-color:#000;
+	height:3px;
+	width:247px;
+	position:absolute;
+	top:96px;
+	left:223px;
+}
+.blackline1{
+	width:249px;
+	top:216px;
+	left:223px;
+}
+.blackline2{
+	width:3px;
+	height:31px;
+	top:186px;
+	left:223px;
+}
+.blackline3{
+	width:3px;
+	height:113px;
+	top:103px;
+	left:469px;
+}
+.whitepatch{
+	background-color:#fff;
+	height:26px;
+	width:40px;
+	position:absolute;
+	top:70px;
+	left:214px;
+	z-index:1;
+}
+/*All arrow ends here*/

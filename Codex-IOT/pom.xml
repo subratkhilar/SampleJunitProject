@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	
+	
+	
+	<groupId>net.atos</groupId>
+	<artifactId>Codex-IOT</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Codex-IOT</name>
+	
+	<parent>
+	<groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.5.3.RELEASE</version>
+	</parent>
+	
+	<!-- Project Modules -->
+	<properties>
+		<java-version>1.8</java-version>
+		<targetJdk>1.8</targetJdk>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.root.directory>${basedir}</project.root.directory>
+	</properties>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>oss.sonatype.org-jayway-snapshots</id>
+			<name>Jayway OpenSource SNAPSHOTs on Sonatype.org</name>
+			<url>http://oss.sonatype.org/content/repositories/jayway-snapshots/</url>
+			<snapshots>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	<!-- Repositories -->
+	<repositories>
+		<repository>
+			<id>central</id>
+			<url>http://repo2.maven.org/maven2/</url>
+			<releases>
+			</releases>
+			<snapshots>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>central2</id>
+			<url>http://repo1.maven.org/maven2/</url>
+			<releases>
+			</releases>
+			<snapshots>
+			</snapshots>
+		</repository>
+
+		<repository>
+			<id>jboss-public-repository-group</id>
+			<url>http://repository.jboss.org/nexus/content/groups/public-jboss</url>
+			<releases>
+			</releases>
+			<snapshots>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>mvnrepository</id>
+			<url>http://mvnrepository.com/artifact</url>
+			<releases>
+			</releases>
+			<snapshots>
+			</snapshots>
+		</repository>
+
+		<repository>
+			<id>springsource-milestone</id>
+			<name>SpringSource Milestone Repository</name>
+			<url>http://repo.springsource.org/milestone</url>
+		</repository>	
+
+	</repositories>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Project Dependencies -->
+			<dependency>
+				<groupId>net.atos</groupId>
+				<artifactId>Codex-IOT-application</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>	
+		</dependencies>
+	</dependencyManagement>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<dtap.properties.file>${project.root.directory}/Codex-IOT-resources/src/main/resources/dtap/dev.properties</dtap.properties.file>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<dtap.properties.file>${project.root.directory}/Codex-IOT-resources/src/main/resources/dtap/test.properties</dtap.properties.file>
+			</properties>
+		</profile>
+		<profile>
+			<id>acc</id>
+			<properties>
+				<dtap.properties.file>${project.root.directory}/Codex-IOT-resources/src/main/resources/dtap/acc.properties</dtap.properties.file>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<dtap.properties.file>${project.root.directory}/Codex-IOT-resources/src/main/resources/dtap/prod.properties</dtap.properties.file>
+			</properties>
+		</profile>
+	</profiles>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>1.0-alpha-2</version>
+				<executions>
+					<execution>
+						<id>read-properties</id>
+						<phase>pre-clean</phase>
+						<goals>
+							<goal>read-project-properties</goal>
+						</goals>
+						<configuration>
+							<files>
+								Last file in this list has highest precedence.
+								<file>${dtap.properties.file}</file>
+							</files>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin> 
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+				<!-- jaxb plugin -->
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<version>0.8.3</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<version>2.9</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.3.2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>1.2.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>hibernate3-maven-plugin</artifactId>
+					<version>3.0</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>1.6</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-pmd-plugin</artifactId>
+					<version>3.0.1</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>findbugs-maven-plugin</artifactId>
+					<version>2.5</version>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<version>2.10</version>
+				</plugin>
+				
+				
+			</plugins>
+		</pluginManagement>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.sql</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.0.1</version>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>2.5</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.10</version>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<formats>
+						<format>html</format>
+						<format>xml</format>
+					</formats>
+				</configuration>
+			</plugin>	
+		</plugins>
+	</reporting>
+  <modules>
+    <module>Codex-IOT-application</module>
+    <module>Codex-IOT-common</module>
+    <module>Codex-IOT-resources</module>
+    <module>Codex-IOT-data</module>
+    <module>Codex-IOT-data-resources</module>
+    <module>Codex-IOT-service</module>
+    <module>Codex-IOT-server</module>
+    <module>Codex-IOT-server-resources</module>
+    <module>Codex-IOT-rest-api</module>
+    <module>Codex-IOT-web</module>
+  </modules>
+</project>

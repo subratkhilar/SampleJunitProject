@@ -1,0 +1,94 @@
+<div class="posrel">
+<div ng-include="'templates/HeaderNavigationBar.html'"></div>
+<section>
+<div id="reportGraphsSection">
+            <h2 class="reportTitle">REPORTS</h2>
+            <div id="reportGraphsContent" class="row">
+                
+                <div class="col-xs-6">
+				
+						<div class="panel panel-custom" id="first_report_panel_body">
+                        <div class="panel-heading" id="first_panel_report_heading">
+                            <div class="panel-title"><nav>Report Name
+                               <!--  <select class="dropdown">
+                                          <option value="all" selected>REPORTS</option>
+                                          
+                                </select>  -->
+                                            
+                                           <a href="#/welcome/alerts" title="Excelreport" onClick="return false;"><i class="fa fa-file-excel-o fa-12x" aria-hidden="true"></i>Export Report</a></nav>
+                            </div>
+                        </div>
+                        <div class="panel-body" ng-controller="reportCtrl">
+                            <nvd3 options="options" data="data" showYAxis="false"></nvd3> 
+
+                        </div>
+                    </div>
+					
+					<div class="panel panel-custom" id="second_report_panel_body">
+                        <div class="panel-heading" id="second_panel_report_heading">
+                            <div class="panel-title"><nav>Report Name
+                                 <!-- <select class="dropdown">
+                                          <option value="all" selected>REPORTS</option>
+                                          
+                                </select>  -->
+                                            <a href="#/welcome/alerts" title="Excelreport" onClick="return false;"><i class="fa fa-file-excel-o fa-12x" aria-hidden="true"></i>Export Report</a></nav>
+                            </div>
+                        </div>
+                        <div class="panel-body" ng-controller="reportCtrl">
+                            <nvd3 options="options" data="data" showYAxis="false"></nvd3> 
+
+                        </div>
+                    </div>
+                    <!-- Your first column here -->
+                </div>
+                <div class="col-xs-6">
+                    <!-- Your second column here -->
+
+                    
+                    <div class="panel panel-custom" id="third_report_panel_body">
+                        <div class="panel-heading" id="third_panel_report_heading">
+                            <div class="panel-title"><nav>Report Name
+                               <!--   <select class="dropdown">
+                                          <option value="all" selected>REPORTS</option>
+                                          
+                                </select>  -->
+                                <a href="#/welcome/alerts" title="Excelreport" onClick="return false;"><i class="fa fa-file-excel-o fa-12x" aria-hidden="true"></i>Export Report</a></nav>
+                                            
+                            </div>
+                        </div>
+                        <div class="panel-body" ng-controller="reportCtrl">
+                            <nvd3 options="options" data="data" showYAxis="false"></nvd3> 
+
+                        </div>
+                    </div>
+					<div class="panel panel-custom" id="fourth_report_panel_body">
+                        <div class="panel-heading" id="fourth_panel_report_heading">
+                            <div class="panel-title"><nav>Report Name
+                               <!--   <select class="dropdown">
+                                          <option value="all" selected>REPORTS</option>
+                                          
+                                </select>  -->
+                                            <a href="#/welcome/alerts" title="Excelreport" onClick="return false;"><i class="fa fa-file-excel-o fa-12x" aria-hidden="true"></i>Export Report</a></nav>
+                            </div>
+                        </div>
+                        <div class="panel-body" ng-controller="reportCtrl">
+                            <nvd3 options="options" data="data" showYAxis="false"></nvd3> 
+
+                        </div>
+                    </div>
+                </div>
+            </div></div>
+    </section>
+
+
+
+<!-- \*** Footer Section Starts here **\ -->
+    <footer class="footer-basic-centered">
+            <p>Copyright &copy; 2017 Atos</p>
+    </footer>
+</div>
+ 
+
+
+
+        

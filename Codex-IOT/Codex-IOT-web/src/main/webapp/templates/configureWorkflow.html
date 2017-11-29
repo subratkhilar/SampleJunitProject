@@ -1,0 +1,617 @@
+<!--Modal popu for update  -->
+<div class="modal fade" id="centralModalSuccess_for_Edit" tabindex="-1"
+	role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog-msg modal-notify modal-success"
+		role="document">
+		<!--     Content -->
+		<div class="modal-content">
+			<!--     Header -->
+			<!--  <div class="modal-header">
+                <p class="heading lead">Modal Success</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div> -->
+
+
+			<!--   Body -->
+			<div class="modal-body">
+				<div class="text-center">
+					<i class="fa fa-check-circle fa-4x mb-3 animated color14"></i>
+					<p class="font16 successmsg">Workflow Updated Successfully</p>
+				</div>
+			</div>
+
+			<!--  Footer -->
+			<div class="okbtn">
+				<!--  <a type="button" class="btn btn-primary-modal">Get it now <i class="fa fa-diamond ml-1"></i></a> -->
+				<a type="button" class="btn" data-dismiss="modal"
+					ng-click="reloadPage()">Ok</a>
+			</div>
+		</div>
+		<!-- /.Content -->
+	</div>
+</div>
+<!-- Edit Alert Workflow start -->
+
+<div ng-controller="EditWorkflowCtrls">
+	<div class="modal fade" id="myModalEdit" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title color1 font22">Edit Alert WorkFlow</h4>
+				</div>
+				<div class="modal-body" style="height: 550px;">
+<div ng-show="showErrorEdit" class="errorLogin">
+							<span class="error"> {{editErrorMessage}}</span>
+						</div>
+					<div class="iotwfcontainer">
+						<!-- Start div starts here -->
+
+						<div id="startoval">
+							<div class="color4 font16">Start</div>
+						</div>
+						<!-- Start div ends here -->
+
+						<!-- Start arrow starts here -->
+						<div class="arrowheight cursor">
+							<div class="arrow">
+								<span>&#8595;</span>
+							</div>
+						</div>
+						<!-- Start arrow ends here -->
+						<div id="coachMarks">
+							<div id="coachMarksMsg" class="color1">{{helpMessageAlert}}</div>
+
+							<div class="quewrap" title="help">
+								<i class="fa fa-question-circle que" ng-click="toggleHelp();"
+									aria-hidden="true"></i>
+							</div>
+						</div>
+						<!-- Select project div starts here -->
+						<div id="process_proj" class="floatL">
+							<div class="color4 font16">Select project</div>
+							<div>
+
+								<select name="project_id" id="dropdown" ng-model="projectIDEdit"
+									disabled class="Sitedropdown">
+									<option value="">{{projectForEdit}}</option>
+								</select>
+
+							</div>
+						</div>
+						<!-- Select project div ends here -->
+
+						<!-- Select project arrow ends here -->
+						<div class="arrowwidth1 floatL cursor">
+							<div class="arrow1">
+								<span align="center" text="next">&#8594;</span>
+							</div>
+
+						</div>
+						<!-- Select project arrow ends here -->
+
+						<!-- Select assets div starts here -->
+						<div id="process_assets" class="floatL">
+							<div class="color4 font16">Select Assets</div>
+							<div>
+								<form name="myFormasset">
+									<select name="asset_id" id="dropdown" ng-model="assetIDEdit"
+										disabled class="Sitedropdown">
+										<option value="">{{assetForEdit}}</option>
+									</select>
+								</form>
+							</div>
+						</div>
+						<!-- Select assets div ends here -->
+
+
+						<div class="arrowwidth1 floatL cursor">
+							<div class="arrow1">
+								<span align="center" text="next">&#8594;</span>
+							</div>
+						</div>
+						<!-- Select assets arrow ends here -->
+						<!-- Select sensor div starts here -->
+						<div class="iotwfcontainer">
+							<div id="process_sensor" class="floatL">
+								<div class="color4 font16">Select sensor</div>
+								<div>
+									<select name="sensor_id" id="dropdown" disabled
+										class="Sitedropdown">
+										<option value="">{{sensorForEdit}}</option>
+									</select>
+								</div>
+							</div>
+							<!-- Select sensor arrow ends here -->
+							<div class="arrowheight cursor">
+								<div class="arrow2">
+									<span>&#8595;</span>
+								</div>
+							</div>
+							<div class="whitepatch"></div>
+							<div class="blackline"></div>
+							<div class="arrowheight">
+								<div class="arrow3">
+									<span>&#8595;</span>
+								</div>
+							</div>
+						</div>
+						<!-- Select sensor arrow ends here -->
+
+						<!-- Select sensor div ends here -->
+
+						<div class="iotwfcontainer">
+							<!-- Enter Temp less div starts here -->
+							<div id="diamond">
+								<div id="diamondcontent">
+									<div class="color4 font16">Min Threshold</div>
+									<div>
+										<input type="number" id="dropdown" name="defaultProject" min="0"
+											placeholder="Min Threshold" ng-model="tempMinEdit"
+											ng-value="editMinTemp">
+									</div>
+								</div>
+							</div>
+							<!-- Enter Temp less div ends here -->
+							<div class="blackline1"></div>
+							<div class="blackline2"></div>
+							<div class="blackline3"></div>
+							<!-- Enter Temp higher div starts here -->
+							<div id="diamond1">
+								<div id="diamondcontent">
+									<div class="color4 font16">Max Threshold</div>
+									<div>
+										<input type="number" id="dropdown" name="defaultProject" min="0"
+											placeholder="Max Threshold" ng-model="tempMaxEdit"
+											ng-value="editMaxTemp">
+									</div>
+								</div>
+							</div>
+							<!-- Select assets arrow ends here -->
+							<div class="arrowwidth floatL cursor">
+								<div class="arrow4">
+									<span align="center" text="next">&#8594;</span>
+								</div>
+							</div>
+							<!-- Select assets arrow ends here -->
+							<!-- Enter Temp higher div ends here -->
+
+							<!-- Select Notification type div starts here -->
+							<div id="process_Notitype" class="floatL">
+								<div class="color4 font16">Number of occurrences</div>
+								<input type="text" id="dropdown" name="defaultProject"
+									ng-model="noofOccEdit" ng-value="editNo">
+								<div></div>
+							</div>
+							<!-- Select Notification type div ends here -->
+
+							<!-- Select assets arrow ends here -->
+							<div class="arrowwidth floatL cursor">
+								<div class="arrow5">
+									<span align="center" text="next">&#8594;</span>
+								</div>
+							</div>
+
+							<!-- Select assets arrow ends here -->
+
+							<!-- Select Notification value div starts here -->
+							<div id="process_value" class="floatL">
+								<div class="color4 font16">Notification Type</div>
+								<div>
+									<select id="dropdown" ng-model="notificationTypeAlert" disabled>
+										<option value="">Push Notification</option>
+										<option>Push Notification</option>
+										<option disabled>Email</option>
+										<option disabled>phone</option>
+									</select>
+
+								</div>
+							</div>
+							<!-- Select Notification value div ends here -->
+							<!-- Start arrow starts here -->
+							<div class="arrowheight cursor">
+								<div class="arrow6">
+									<span>&#8595;</span>
+								</div>
+							</div>
+							<!-- Start arrow ends here -->
+							<!-- End div starts here -->
+							<div id="endovalalert" ng-click="getAllInformation();">
+								<div class="color4 font16">End</div>
+							</div>
+							<!-- End div ends here -->
+
+						</div>
+
+
+
+					</div>
+
+				</div>
+				<div class="form-group wrkwrap">
+					<button type="button" class="btn btn-primary wrkcancel"
+						data-dismiss="modal" ng-click="reloadPage();">Close</button>
+					<button type="submit" class="btn btn-primary wrkok"
+						ng-click="editWorkflow();">Update</button>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+
+<!-- Edit Alert Workflow end -->
+
+<!--Edit notification workflow start  -->
+<div class="container" ng-controller="EditWorkflowCtrls">
+	<!-- Trigger the modal with a button -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModalEditNotificationWorkflow"
+		role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title color1 font22">Edit Notification
+						WorkFlow</h4>
+				</div>
+				<div class="modal-body" style="height: 550px;">
+				<div ng-show="showErrorEdit" class="errorLogin">
+							<span class="error"> {{editErrorMessage}}</span>
+						</div>
+					<div class="iotwfcontainer">
+						<!-- Start div starts here -->
+
+						<div id="startoval">
+							<div class="color4 font16">Start</div>
+						</div>
+						<!-- Start div ends here -->
+
+						<!-- Start arrow starts here -->
+						<div class="arrowheight cursor">
+							<div class="arrow">
+								<span>&#8595;</span>
+							</div>
+						</div>
+						<!-- Start arrow ends here -->
+						<div id="coachMarks">
+							<div id="coachMarksMsg" class="color1">{{helpMessage}}</div>
+
+							<div class="quewrap" title="help">
+								<i class="fa fa-question-circle que" ng-click="toggleHelp();"
+									aria-hidden="true"></i>
+							</div>
+						</div>
+						<!-- Select project div starts here -->
+						<div id="process_proj" class="floatL">
+							<div class="color4 font16">Select project</div>
+							<div>
+								<form name="myForm">
+									<select name="project_id" id="dropdown" ng-model="projectID"
+										class="Sitedropdown" disabled>
+										<option value="">{{projectForEdit}}</option>
+									</select>
+								</form>
+
+							</div>
+						</div>
+						<!-- Select project div ends here -->
+
+						<!-- Select project arrow ends here -->
+						<div class="arrowwidth1 floatL cursor">
+							<div class="arrow1">
+								<span align="center" text="next">&#8594;</span>
+							</div>
+
+						</div>
+						<!-- Select project arrow ends here -->
+
+						<!-- Select assets div starts here -->
+						<div id="process_assets" class="floatL">
+							<div class="color4 font16">Select Assets</div>
+							<div>
+								<form name="myFormasset">
+									<select name="asset_id" id="dropdown" ng-model="assetID"
+										class="Sitedropdown" disabled>
+										<option value="">{{assetForEdit}}</option>
+									</select>
+								</form>
+							</div>
+						</div>
+						<!-- Select assets div ends here -->
+
+
+						<div class="arrowwidth1 floatL cursor">
+							<div class="arrow1">
+								<span align="center" text="next">&#8594;</span>
+							</div>
+						</div>
+						<!-- Select assets arrow ends here -->
+						<!-- Select sensor div starts here -->
+						<div class="iotwfcontainer">
+							<div id="process_sensor" class="floatL">
+								<div class="color4 font16">Select Sensor</div>
+								<div>
+									<select name="sensor_id" id="dropdown" class="Sitedropdown"
+										disabled>
+										<option value="">{{sensorForEdit}}</option>
+									</select>
+								</div>
+							</div>
+							<!-- Select sensor arrow ends here -->
+							<div class="arrowheight cursor">
+								<div class="arrow2">
+									<span>&#8595;</span>
+								</div>
+							</div>
+							<div class="whitepatch"></div>
+							<div class="blackline"></div>
+							<div class="arrowheight">
+								<div class="arrow3">
+									<span>&#8595;</span>
+								</div>
+							</div>
+						</div>
+						<!-- Select sensor arrow ends here -->
+
+						<!-- Select sensor div ends here -->
+
+						<div class="iotwfcontainer">
+							<!-- Enter Temp less div starts here -->
+							<div id="diamond">
+								<div id="diamondcontent">
+									<div class="color4 font16">Min Threshold</div>
+									<div>
+										<input type="number" id="dropdown" name="defaultProject"
+											ng-value="editMinTemp" ng-model="tempMinEdit">
+									</div>
+								</div>
+							</div>
+							<!-- Enter Temp less div ends here -->
+							<div class="blackline1"></div>
+							<div class="blackline2"></div>
+							<div class="blackline3"></div>
+							<!-- Enter Temp higher div starts here -->
+							<div id="diamond1">
+								<div id="diamondcontent">
+									<div class="color4 font16">Max Threshold</div>
+									<div>
+										<input type="number" id="dropdown" name="defaultProject"
+											ng-value="editMaxTemp" ng-model="tempMaxEdit">
+									</div>
+								</div>
+							</div>
+							<!-- Select assets arrow ends here -->
+							<div class="arrowwidth floatL cursor">
+								<div class="arrow4">
+									<span align="center" text="next">&#8594;</span>
+								</div>
+							</div>
+							<!-- Select assets arrow ends here -->
+							<!-- Enter Temp higher div ends here -->
+
+							<!-- Select Notification type div starts here -->
+							<div id="process_Notitype" class="floatL">
+								<div class="color4 font16">Notification Type</div>
+								<div>
+									<form name="myFormnotification">
+										<select id="dropdown" ng-model="notification" disabled>
+											<option value="">Push Notification</option>
+											<option>Push Notification
+												</opion>
+											<option disabled>Email</option>
+											<option disabled>phone</option>
+										</select>
+									</form>
+								</div>
+							</div>
+							<!-- Select Notification type div ends here -->
+
+							<!-- Select assets arrow ends here -->
+							<div class="arrowwidth floatL cursor">
+								<div class="arrow5">
+									<span align="center" text="next">&#8594;</span>
+								</div>
+							</div>
+							<div id="endoval">
+								<div class="color4 font16">End</div>
+							</div>
+							<!-- End div ends here -->
+
+						</div>
+					</div>
+
+				</div>
+				<div class="form-group wrkwrap">
+					<button type="button" class="btn btn-secondary wrkcancel "
+						data-dismiss="modal" ng-click="reloadPage();">Close</button>
+					<button type="submit" class="btn btn-primary wrkok"
+						ng-click="editWorkflow();">Update</button>
+					<div class="clear"></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+<!--Edit notification workflow end  -->
+
+
+
+<!--/.Content-->
+</div>
+
+
+<!--/.Content-->
+<div>
+
+	<div id="">
+		<div class="height20"></div>
+		<div class="floatL width145">
+			<div ng-include="'templates/Alert.html'"></div>
+		</div>
+		<div class="floatL width145">
+			<div ng-include="'templates/notification.html'"></div>
+		</div>
+		<!-- 	<div class="wrap floatR" class="search_bar">
+			<div class="iotsearch bgcolorWht">
+				<span class="iotsearchicon"><i class="fa fa-search color2"></i></span><input type="text" ng-model="search_by_text" class="iotsearchinput font14" placeholder="search workflow">
+				
+			</div>
+		</div> -->
+		<br /> <br />
+		<div class="clear"></div>
+	</div>
+	<div>
+		<!-- <div class="bgcolortblylw color4 font16 tablemainhdr">EXISTING WORKFLOW</div>
+
+ -->
+
+		<div ng-controller="uigridCtrl" class="table-responsive marginTS">
+
+			<div>
+
+				<table id="j_table" datatable="ng" class="display font14 dataTable"
+					style="background-color: #fff !important;" cellspacing="0"
+					width="100%">
+
+
+					<thead>
+						<tr class="css_for_th font22">
+
+							<td colspan="11">EXISTING WORKFLOWS</td>
+
+						</tr>
+						<tr>
+							<th>Created Date</th>
+							<th>Workflow ID</th>
+							<th>Workflow Type</th>
+							<th>Min Threshold</th>
+							<th>Max Threshold</th>
+							<th>No. of Occurences</th>
+							<th>Sensor ID</th>
+							<th>Project ID</th>
+							<th>Asset ID</th>
+							<th>Status</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr ng-repeat=" workflow_data in  WorkflowDetails ">
+							<td>{{workflow_data.createdDate | date:'dd-MM-yyyy'}}</td>
+							<td>{{workflow_data.workflowId}}</td>
+							<td>{{workflow_data.eventType}}</td>
+							<td>{{workflow_data.lowerLimit}}</td>
+							<td>{{workflow_data.upperLimit}}</td>
+							<td
+								ng-if="workflow_data.eventType=='Alert' || workflow_data.eventType=='alert'">{{workflow_data.noOfOccurrences}}</td>
+
+							<td ng-if="workflow_data.eventType=='Notification'">--</td>
+							<td>{{workflow_data.sensorId}}</td>
+							<td>{{workflow_data.projectId}}</td>
+							<td>{{workflow_data.assetId}}</td>
+							<!-- 	 <td  ng-if="workflow_data.active == true" style="color:#00A59C;">ACTIVE</td> 
+				 	 <td  ng-if="workflow_data.active == false" style="color:#ff0000;">INACTIVE</td>  -->
+
+							<td ng-if="workflow_data.active == true" class="color13">Active</td>
+							<td ng-if="workflow_data.active == false" class="cri">InActive</td>
+							<td>
+								<div>
+									<div
+										ng-if="workflow_data.eventType=='Alert'  || workflow_data.eventType=='alert'"
+										data-target="#myModalEdit" data-toggle="modal"
+										data-backdrop="static"
+										data-keyboard="false" 
+										ng-click="edit_button(workflow_data)">
+										<i class="fa  fa-edit font25 color14 edit floatL"></i>
+									</div>
+									<div ng-if="workflow_data.eventType=='Notification'"
+										data-target="#myModalEditNotificationWorkflow"
+										data-toggle="modal" data-backdrop="static"
+										data-keyboard="false"
+										ng-click="edit_button(workflow_data)
+										">
+										<i class="fa  fa-edit font25 color14 edit floatL"></i>
+									</div>
+
+									<!-- 	<span ><i class="fa  fa-trash-o font25 color7 trash"  ng-click="delete_button(workflow_data);deleteWorkflow();reloadPage();"></i></span> -->
+									<div class="floatL">
+										<button ng-if="workflow_data.active == true" type="button"
+											ng-click="delete_button(workflow_data);deleteWorkflow();"
+											class="btn btn-sm btn-secondary btn-toggle active"
+											data-toggle="button" aria-pressed="true" autocomplete="off">
+											<div class="handle"></div>
+
+										</button>
+
+										<button ng-if="workflow_data.active == false" type="button"
+											id="sensorToggle"
+											ng-click="delete_button(workflow_data);deleteWorkflow();"
+											class="btn btn-sm btn-secondary btn-toggle"
+											data-toggle="button" aria-pressed="true" autocomplete="off">
+											<div class="handle"></div>
+
+										</button>
+
+									</div>
+								</div>
+							</td>
+						</tr>
+
+
+
+					</tbody>
+				</table>
+				<div class="modal fade" id="centralModalSuccess_for_Delete"
+					tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+					aria-hidden="true">
+					<div class="modal-dialog-msg modal-notify modal-success"
+						role="document">
+						<!--     Content -->
+						<div class="modal-content">
+							<!--     Header -->
+							<!--  <div class="modal-header">
+                <p class="heading lead">Modal Success</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div> -->
+
+
+							<!--   Body -->
+							<div class="modal-body">
+								<div class="text-center">
+									<i class="fa fa-check-circle fa-4x mb-3 animated color14"></i>
+									<p class="font16 successmsg">{{message}}</p>
+								</div>
+							</div>
+
+							<!--  Footer -->
+							<div class="okbtn">
+								<!--  <a type="button" class="btn btn-primary-modal">Get it now <i class="fa fa-diamond ml-1"></i></a> -->
+								<a type="button" class="btn" data-dismiss="modal"
+									ng-click="reloadPage()">Ok</a>
+							</div>
+						</div>
+						<!-- /.Content -->
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<div class="height20"></div>
+</div>

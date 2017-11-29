@@ -1,0 +1,118 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Codex IoT</title>
+<!--<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">-->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+
+<!-- Files for table design -->
+
+
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
+<!--<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script> -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" media="screen" href="css/jquery.dataTables.min.css">
+
+
+
+
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome.min.css" >
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-toggle/css/bootstrap2-toggle.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+
+<link rel="stylesheet" href="css/jquery-ui.css">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/angularjs-datetime-picker.css">
+<link href="css/angular-datepicker.css" rel="stylesheet" type="text/css" />
+   
+   <!--  Datepicker libraries -->
+<link rel = "stylesheet" href = "css/angular-material.css">
+<script src="js/angular.min.js"></script>
+   <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+      <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+      <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+      <script src = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+
+<!-- Application style CSS -->
+
+<link rel="stylesheet" href="css/workflow.css">
+<link rel="stylesheet" type="text/css" href="css/leaflet.css">
+<link rel="stylesheet" type="text/css" href="css/L.Icon.Pulse.css">
+<link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.css">
+<!--<link rel="stylesheet" href="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.1/angular-material.css">-->
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+ <script src="js/spin.js"></script>
+ <script src="js/angular-spinner.js"></script>
+
+<script src="js/angulardatatables.min.js"></script>
+
+
+<script src="https://cdn.datatables.net/buttons/1.4.0/js/dataTables.buttons.min.js"></script>
+   
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.4.0/css/buttons.dataTables.min.css">
+<link rel="stylesheet" media="screen" href="css/style.css">
+    
+
+<!-- main program script files  -->
+
+<script src="js/angular.min.js"></script>
+<script src="js/angular-ui-router.min.js"></script>
+<script src="js/angularjs-datetime-picker.js"></script>
+<script src="js/Chart.min.js"></script>
+<script src="js/angular-chart.min.js"></script>
+<script src="js/UUID_to_Date.js"></script>
+<script src="js/angular-datepicker.js"></script>
+<!-- <script src="js/jquery-1.11.2.min.js"></script> -->
+ 
+
+
+<script src="js/bootstrap.min.js"></script> 
+
+<script src="bower_components/bootstrap-toggle/js/bootstrap2-toggle.min.js"></script>
+
+
+<script src="app.js"></script>
+<script src="config.js"></script>
+<script src="js/string.js"></script>
+
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDSO1ATK90z0gYnYGtVAHGRBXKye9xSqs"></script>
+<script src="js/leaflet.js"></script>
+<script src="js/L.Icon.Pulse.js"></script>
+
+<!--Controllers- of program -->
+<script src="controllers/loginController.js"></script>
+<script src="controllers/mapController.js"></script>
+<script src="controllers/project_config_controller.js"></script>
+<script src="controllers/service.js"></script>
+<script src="controllers/sidebarController.js"></script>
+<script src="controllers/auth.js"></script>
+<script src="controllers/asset_config_controller.js"></script>
+<script src="controllers/sensor_config_controller.js"></script>
+<script src="controllers//alertworkflowController.js"></script>
+<script src="controllers//notificationController.js"></script>
+<script src="controllers/workflowListController.js"></script>
+<script src="controllers/editWorkflow.js"></script>
+<script src="controllers/graphCtrl.js"></script>
+
+<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css">   -->
+</head>
+<body id="codex-ui" ng-app="codexIot">
+	
+	<div ui-view class="posRel"></div>
+</body>
+</html>

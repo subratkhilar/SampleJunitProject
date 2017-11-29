@@ -1,0 +1,365 @@
+
+<div ng-include="'templates/header.html'"></div>
+<div id="page-content-wrapper">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="page-title color1 font27">IoT Platform</div>
+
+			</div>
+		</div>
+		<div class="row" >
+			<div class="col-lg-8 col-md-8 col-sm-8 space">
+				<div class="mapwrap ">
+					<div id="map" data-tap-disabled="true" ng-init="initMap()"></div>
+				</div>
+			</div>
+
+			<div class="col-lg-4  col-md-4 col-sm-4 space">
+			
+				
+						<div class="contentWrap bgcolorWht kpiminheight">
+						<div class="color2  cont-title-border fontt27">Summary</div>
+						
+						<div class="kpi-box floatL bgcolorRed kpiboxMar ">
+						 <div class="color4 font50 textcenter"> {{alertCount}} </div>
+						  <div class="color4 font13 textcenter"> EVENTS </div> 
+						  </div> 
+						  
+						  <div class="kpi-box floatL bgcolorYlw kpiboxMar ">
+						 <div class="color4 font50 textcenter"> {{ total_no_of_project }}  </div>
+						  <div class="color4 font13 textcenter"> PROJECTS </div> 
+						  </div>
+						  
+						  <div class="kpi-box floatL bgcolorPrl kpiboxMar ">
+						 <div class="color4 font50 textcenter"> {{ total_no_of_assets }} </div>
+						  <div class="color4 font13 textcenter"> ASSETS </div> 
+						  </div>
+						  
+						  <div class="kpi-box floatL bgcolorTeal kpiboxMarlast">
+						 <div class="color4 font50 textcenter"> {{ total_no_of_sensor }}  </div>
+						  <div class="color4 font13 textcenter"> SENSORS </div> 
+						  </div>
+						  
+                	  <div class="clear"></div>
+						</div>
+					
+				
+	
+			
+
+		</div>
+</div>
+
+		<div class="row row-eq-height">
+		
+			<div class="col-lg-8 col-md-8 col-sm-8 space">
+			   <div class="contentWrap bgcolorWht">
+			  
+	<div class="color10 fontt27 cont-title-border">Events</div>
+				
+				<div class="iot-alert font14 eventsht">
+
+				<table width="100%">
+				<tr class="listview-border">
+				<thead class="listview-border">
+				<th >
+				Date
+				</th>
+				<th>
+				ProjectId
+				</th>
+				<th>
+				SensorId
+				</th>
+				<th>
+				Event Type
+				</th>
+				<th>
+				Description
+				</th>
+				<th>
+				Severity
+				</th>
+				</th>
+				</tr>
+				
+			
+			<tr ng-repeat="x in alertData">
+				
+						<td>{{x.createdDate | date:'yyyy-MM-dd HH:mm':'UTC'}} </td>
+					<td>{{x.projectId}} </td>
+					<td>{{x.sensorId}} </td>
+					<td>{{x.eventtype}} </td>
+					<td>{{x.eventdesc}} </td>
+					<td ng-if="x.severity=='Normal'" class="med bold">{{x.severity}} </td>
+					<td ng-if="x.severity=='Medium'" class="med bold">{{x.severity}} </td>
+					<td ng-if="x.severity=='High'" class="high bold">{{x.severity}} </td>
+					<td ng-if="x.severity=='Low'" class="lo bold">{{x.severity}} </td>
+					<td ng-if="x.severity=='Critical'" class="cri bold">Crtical</td>
+					<td ng-if="x.severity=='normal'" class="med bold">Normal</td>
+					<td ng-if="x.severity=='medium'" class="med bold">Medium</td>
+					<td ng-if="x.severity=='high'" class="high bold">High</td>
+					<td ng-if="x.severity=='low'" class="lo bold">Low </td>
+					<td ng-if="x.severity=='critical'" class="cri bold">Critical</td>
+			</tr>
+				
+			
+				</table>
+				</div> 
+			    
+			    
+			    
+			    
+			   </div>
+         </div>
+         
+         
+		
+		<div class="col-lg-4 col-md-4 col-sm-4 space">
+			<div class="contentWrap bgcolorWht">
+				<div class="color2 fontt27 cont-title-border" >Project Details</div>
+				
+				<div>
+
+					<table class="color3 font14 projDtl tablelayout" width="100%" border="0">
+
+						<tr>
+							<td class="bold">Project Id</td>
+							<td>{{ProjectDetails.projId}}</td>
+
+						</tr>
+						<tr>
+							<td class="bold">Project Name</td>
+							<td>{{ProjectDetails.ProjName}}</td>
+
+						</tr>
+
+						<tr>
+							<td class="bold">Project Location</td>
+							<td>{{ProjectDetails.ProjLocation}}</td>
+
+						</tr>
+
+						<tr>
+							<td class="bold">No. of Assets</td>
+							<td>{{ProjectDetails.gateways}}</td>
+
+						</tr>
+						<tr>
+							<td class="bold">No. of Sensors</td>
+							<td>{{ProjectDetails.totalSensors}}</td>
+
+						</tr>
+						
+						<tr>
+							<td class="bold">Project Description</td>
+							<td class="wordbreak">{{ProjectDetails.projDesc}}</td>
+
+						</tr>
+					</table>
+
+				</div>
+			</div>
+			</div>
+	</div>
+
+<div class="row">
+
+<div class="col-lg-4 col-md-4 col-sm-4 space">
+			<div class="contentWrap bgcolorWht">
+				<div class="color9 fontt27 cont-title-border">Current Projects</div>
+					 <ul class="list-group sensorheight">
+								  	<div class="font14 propermessage"  ng-hide="pflag"  > No Project Exist </div>
+								  	<li ng-repeat="x in projectData" class="listgroupitem cursor" ng-click="projectClickDetails(this);setSelectedProject(x.projectId)">
+									<div id="{{x.projectId}}" ng-class="{configselected : x.projectId === idSelectedVote}" class="listcontent">
+								  		<div class="floatL"><i class="fa fa-cubes icon-project" ></i></div>
+								  		  <div name="projectList"  class="floatL dev-margin color9" >
+					                       <span class="font14 bold"> {{x.projectName}}</span>
+					          			  <div class="color13 ">
+					          			    <span class="font14">Id: {{x.projectId}}</span>
+					          			    <span ng-if="x.active=='true'" class="color6 font14" >{{x.active}} </span>
+								  			<span ng-if="x.active=='false'" class="color7 font14" >{{x.active}} </span> 
+								  		 </div>
+					 				   </div>
+					 				    <div class="floatR toggle-margin">
+					 				    <span ng-if="x.active" class="color13 font14 Normalfw" style="padding:2px 7px 0  0;"> {{x.active?'Active':''}}</span>
+										<span ng-if!="x.active" class="color7 font14 Normalfw" style="padding:2px 7px 0  0;"> {{x.active?'':'InActive'}}</span>
+					 				  <!--   <span style="padding:2px 7px 0  0;"><i class="fa  fa-edit font25 color13 edit" ng-click="edit()"></i></span>
+								  		  <span>  <i class="fa fa-arrow-right" aria-hidden="true"></i></span> -->
+
+					 				   </div> 
+					 				   <div class="clear"></div>
+									   
+									   </div>
+								  	</li>
+								  	
+								  </ul>
+				
+				</div>
+			</div>
+			
+			<div class="col-lg-4 col-md-4 col-sm-4 space">
+							<div class="contentWrap bgcolorWht">
+								<div  class="color5 fontt27 cont-title-border">Assets</div>
+									
+								  <ul  class="list-group sensorheight">
+								  	 <div  class="font14 propermessage"   ng-hide="flag"> No Asset Exist for {{proId}} </div>
+								  	<li ng-repeat="x in assetData" class="listgroupitem cursor" >
+									<div ng-click="assetClickDetails(this);setSelectedAsset(x.assetId)" ng-class="{configselected : x.assetId === idSelectedAsset}" class="listcontent">
+								  		<div class="floatL"><i class="fa fa-mobile icon-device"></i></div>
+								  		  <div class="floatL dev-margin color5">
+					                       <span class="font14 bold"> {{x.assetName}}</span>
+										  
+					          			  <div class="color13 font14">Id:{{ x.assetId}}</div>
+					 				   </div>
+									   
+									   
+									   
+									    <div  class="floatR  toggle-margin">
+					 				    <span ng-if="x.active" class="color13 font14 Normalfw" style="padding:2px 7px 0  0;"> {{x.active?'Active':''}}</span>
+										<span ng-if!="x.active" class="color7 font14 Normalfw" style="padding:2px 7px 0  0;"> {{x.active?'':'InActive'}}</span>
+					 				  <!--   <span style="padding:2px 7px 0  0;"><i class="fa  fa-edit font25 color13 edit" ng-click="edit()"></i></span>
+								  		  <span>  <i class="fa fa-arrow-right" aria-hidden="true"></i></span> -->
+
+					 				   </div> 
+									   
+									   
+					 				
+					 				   <div class="clear"></div>
+									   </div>
+								  	</li>
+								  	
+								  </ul>
+								  
+							</div>
+						</div>
+			
+					<div class="col-lg-4 col-md-4 col-sm-4 space">
+			<div class="contentWrap bgcolorWht">
+				<div class="color1 fontt27 cont-title-border">Sensor</div>
+				
+<ul class="list-group sensorheight">
+								  	<div class="font14 propermessage"  ng-hide="sflag"> No Sensor Exist <span ng-show="flag"> for {{ assetId }}</span> </div>
+								  	<li ng-repeat="x in sensorData" class="listgroupitem">
+									<div class="listcontent">
+								  		<div  class="floatL"><i class="fa fa-compass icon-sensor"></i></div>
+								  		  <div class="floatL dev-margin  color1">
+					                        <span class=" font14 bold"> {{x.sensorsName}}</span>
+					          			     <div class="color13 font14">Tag:{{ x.sensorTag}}</div>
+					 				   </div>
+									   
+									   
+									    <div class="floatR  toggle-margin">
+					 				    <span ng-if="x.active" class="color13 font14 Normalfw" style="padding:2px 7px 0  0;"> {{x.active?'Active':''}}</span>
+										<span ng-if!="x.active" class="color7 font14 Normalfw" style="padding:2px 7px 0  0;"> {{x.active?'':'InActive'}}</span>
+					 				  <!--   <span style="padding:2px 7px 0  0;"><i class="fa  fa-edit font25 color13 edit" ng-click="edit()"></i></span>
+								  		  <span>  <i class="fa fa-arrow-right" aria-hidden="true"></i></span> -->
+
+					 				   </div> 
+									   
+					 				  <!--  <div  class="floatR  toggle-margin" >
+					 				      <button ng-if="x.active==1" type="button" ng-click="edit(this)"    class="btn btn-sm btn-secondary btn-toggle active" data-toggle="button" aria-pressed="true" autocomplete="off">
+       										 <div class="handle"></div> 
+       										 
+      									  </button>
+
+                                       <button ng-if="x.active!=1"  type="button"  id="sensorToggle"  ng-click="edit(this)" class="btn btn-sm btn-secondary btn-toggle" data-toggle="button" aria-pressed="true" autocomplete="off">
+       										 <div class="handle"></div> 
+       										 
+      									  </button>
+
+					 				   </div>  -->
+					 				   <div style="clear:both;"></div>
+									   </div>
+								  	</li>
+								  	
+								  </ul> 
+				
+					<!-- <ul class="list-group " style='overflow:scroll; width:100%;height:350px;'>
+								  	
+								  	 <li ng-repeat="x in sensorData"  class="listgroupitem">
+								  		<div class="floatL"><i class="fa fa-compass icon font50"></i></div>
+								  		  <div class="floatL dev-margin  color8   fontt16 bold">
+					                         {{x.sensorsName}}
+					          			  
+					 				   </div>
+					 				   <div class="floatR  toggle-margin">
+					 				      <button type="button" class="btn btn-sm btn-secondary btn-toggle active" data-toggle="button" aria-pressed="true" autocomplete="off">
+       										 <div class="handle"></div>
+      									  </button>
+					 				   </div>
+					 				   <div style="clear:both;"></div>
+								  	</li> 
+								  	
+								  </ul> -->
+			</div>
+			</div>
+			
+						<!-- <div class="col-lg-4 col-md-3 col-sm-3 space ">
+							<div class="contentWrap bgcolorWht">
+								<div class="color5 fontt27 cont-title-border">Assets</div>
+								
+								  <ul class="list-group  mCustomScrollbar" style="height:349px;">
+								  	
+								  	<li ng-repeat="x in assetData"  class="listgroupitem">
+								  		<div class="floatL"><i class="fa fa-mobile icon font50"></i></div>
+								  		  <div class="floatL dev-margin  color5  fontt16 bold">
+					                        {{x.assetName}}
+					          			  <div class="color13 font12 Normalfw">Running Time:{{ x.createdDate | date:'h:mm:ss'}}</div>
+					 				   </div>
+					 				   <div class="floatR  toggle-margin">
+					 				      <button type="button" class="btn btn-sm btn-secondary btn-toggle active" data-toggle="button" aria-pressed="true" autocomplete="off">
+       										 <div class="handle"></div>
+      									  </button>
+					 				   </div>
+					 				   <div style="clear:both;"></div>
+								  	</li>
+								  	
+								  </ul>
+								  
+							</div>
+						</div> -->
+			
+						
+			
+			
+				<!-- <div class="col-lg-4 col-md-3 col-sm-3 space">
+			<div class="contentWrap bgcolorWht">
+				<div class="color9 fontt27 cont-title-border">Current Projects</div>
+					 <ul class="list-group" style='overflow:scroll; width:100%;height:350px;'>
+								  	
+								  	<li ng-repeat="x in projectData"  class="listgroupitem">
+								  		<div class="floatL"><i class="fa fa-cubes icon1 font50" ></i></div>
+								  		  <div class="floatL dev-margin  color9  fontt16 bold">
+					                        {{x.projectName}}
+					          			  <div class="color13 font12 Normalfw">Status:
+					          			       {{x.active?'Active':'InActive'}}
+					          			    <span ng-if="x.active=='true'" class="color6 bold" ">{{x.active}} </span>
+								  			<span ng-if="x.active=='false'" class="color7 bold" ">{{x.active}} </span> 
+								  		 </div>
+					 				   </div>
+					 				   <div class="floatR  toggle-margin">
+					 				     <span style="padding:2px 7px 0  0;"><i class="fa  fa-edit font25 color13 edit" ng-click="edit()"></i></span>
+								  		 <span><i class="fa  fa-trash-o font25 color7 trash" ng-click="trash()"></i></span>
+					 				   </div>
+					 				   <div style="clear:both;"></div>
+								  	</li>
+								  	
+								  </ul>
+				
+				</div>
+			</div> -->
+			
+			
+			
+		</div>
+	
+<div class="height20"></div>
+<!-- /#page-content-wrapper -->
+<div ng-include="'templates/footer.html'"></div>
+</div>
+</div>
+</div>
+
+<div class="clear"></div>

@@ -1,0 +1,494 @@
+<div ng-include="'templates/header.html'" ng-init="sensor_detail()"></div>
+<div id="page-content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-title color1 font27">Sensor Configuration</div>
+
+                <!-- seelect tag start from here -->
+
+                <div class="textcenter">
+                    <div class="select_join font14">
+                        <!-- Select Sensor by : <select name="select_part" id="mySelect" ng-model="selected_sensor_id" ng-options="sensor as sensor.sensorId for sensor in sensor_details">  <option value="" hidden >ID</option> <option Value="sensor.sensorId"></option>
+                </select>
+
+            <select lect name="select_part" id="mySelect" ng-model="selected_sensor_name" ng-options="sensor as sensor.sensorsName for sensor in sensor_details">  <option Value="" hidden>NAME</option> <option Value="sensor.sensorsName"></option>
+                </select>
+
+            <select nalect name="select_part" id="mySelect" ng-model="selected_sensor_descrip" ng-options="sensor as sensor.sensorDescription for sensor in sensor_details">  <option Value="" hidden>DESCRIPTION</option> <option Value="sensor.sensorDescription"></option>
+                </select>
+
+         
+            <br>
+             -->
+                    </div>
+                    <div class="height20"></div>
+                </div>
+
+
+
+                <div id="table-part">
+                    <script>
+                        $(document).ready(function () {
+                            $('#j_table').DataTable({
+                                "bLengthChange": false
+                            });
+
+                        });
+                    </script>
+
+                    <div>
+                        <div class="floatL"><button class="btn btn-primary addsensor"  data-toggle="modal"  data-target="#centralModalSm_for_addsensor"
+                                data-whatever="@mdo" data-backdrop="static" data-keyboard="false"> + Add Sensor</button></div>
+                        <div class="wrap floatR" class="search_bar">
+                            <!--   <div class="iotsearch bgcolorWht">
+                <span class="iotsearchicon"><i class="fa fa-search color2"></i></span><input type="text" ng-model="search_by_text" class="iotsearchinput font14" placeholder="search sensor">
+                
+            </div> -->
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <br>
+
+                    <!-- Central Modal for add_project -->
+
+                    <div class="modal fade" id="centralModalSm_for_addsensor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true "
+                        ng-controller="sensor_controller">
+                        <div class="modal-dialog" role="document">
+                            <!--Content-->
+                            <div class="modal-content">
+                                <!--Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title font22 color1" id="myModalLabel">Add Sensor</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="reset_form()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                                </div>
+                                <!--Body-->
+                                <form name="myForm" id="myForm" novalidate>
+                                    <div class="modal-body">
+                                        <div class="font14 iotaddconfig">
+                                        
+                                         <div ng-show="submitFailed" class="errorLogin">
+                                                <span class="error"> {{addformError}} </span>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="SensorID">Sensor ID:<span class="color7">*</span></label>
+                                                <input type="text" class="form-control" id="sensorID" ng-model="sensorId" placeholder="Sensor ID" name="SensorID" maxlength="30" required>
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="SensorName">Sensor Name:<span class="color7">*</span></label>
+                                                <input type="text" class="form-control" id="sensorName" ng-model="sensorsName" placeholder="Sensor Name" name="sensorName" maxlength="40" required>
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="sensorDesc" class="descp">Sensor Description:</label>
+                                                <textarea type="text" rows="3" class="form-control" id="sensorDesc" ng-model="sensorDescription" placeholder="Sensor Description" maxlength="100"name="sensorDesc"></textarea>
+                                                <div class="clear"></div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="sensortag">Sensor Tag:<span class="color7">*</span></label>
+                                                <input type="text" class="form-control" id="sensortag" ng-model="sensorTag" placeholder="Sensor Tag" name="sensortag" maxlength="50" required>
+                                                <div class="clear"></div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="sensorserialnumber">Sensor Serial Number:<span class="color7">*</span></label>
+                                                <input type="text" class="form-control" id="sensorserialnumber" ng-model="sensorSerialNumber" placeholder="Sensor SerialNumber" maxlength="70" name="sensorserialnumber" required>
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="sensordatatype">Sensor Type:<span class="color7">*</span></label>
+                                                <input type="text" class="form-control" id="sensordatatype" ng-model="sensorDatatype" placeholder="Sensor Datatype" name="sensordatatype" maxlength="20" required>
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="linktoasset">Link to Asset:<span class="color7">*</span></label>
+                                                <select id="usr" ng-model="assetId" class="form-control" name="linktoasset" required>
+   <option value="" hidden>Select Asset</option>
+  <option ng-repeat="asset_json_data in  asset_details">{{asset_json_data.assetId}}</option>
+  </select>
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <!--Footer-->
+                                            <div class="form-group">
+                                                <label>&nbsp;</label>
+                                                <button type="button" class="btn btn-secondary cancel" data-dismiss="modal" ng-click="reset_form()">Cancel</button>
+                                                <button type="submit" class="btn btn-primary add" data-target="#centralModalSuccess_for_add"  data-toggle="modal" data-whatever="@mdo" ng-disabled="myForm.$invalid"
+                                                    ng-click=" pass_data()">Add</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                            </div>
+                            <!--/.Content-->
+                        </div>
+                    </div>
+                    <!-- Modal -->
+
+
+                    <!-- Central Modal Medium Success -->
+                    <div class="modal fade" id="centralModalSuccess_for_addsensor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog-msg modal-notify modal-success" role="document">
+                            <!--Content-->
+                            <div class="modal-content">
+                                <!--Header-->
+                                <!--  <div class="modal-header">
+                <p class="heading lead">Modal Success</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+            -->
+
+                                <!--Body-->
+                                <div class="modal-body">
+                                    <div class="text-center">
+                                        <i class="fa fa-check-circle fa-4x mb-3 animated color14"></i>
+                                        <!--<i class="fa fa-check-circle" ></i> -->
+                                        <p class="font16 successmsg">Sensor Added Successfully.</p>
+                                    </div>
+                                </div>
+
+                                <!--Footer-->
+                                <div class="okbtn">
+                                    <!-- <a type="button" class="btn btn-primary-modal">Get it now <i class="fa fa-diamond ml-1"></i></a> -->
+                                    <a type="button" class="btn" data-dismiss="modal" ng-click=" reloadPage()">Ok</a>
+                                </div>
+                            </div>
+                            <!--/.Content-->
+                        </div>
+                    </div>
+                    <!-- Central Modal Medium Success-->
+
+
+
+                    <!-- Central Modal for Edit_project -->
+
+                    <div class="modal fade" id="centralModalSm_for_editsensor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true "
+                        ng-init="asset_detail()">
+                        <div class="modal-dialog" role="document">
+                            <!--Content-->
+                            <!-- 
+        <form ng-controller="config_controller" ng-submit="pass_edited_data(projectId,projectName1,projectLocation1,projectDescription1,latitude1,longitude1)"> -->
+                            <div class="modal-content">
+                                <!--Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title font22 color1" id="myModalLabel">Edit Sensor </h4>
+                                    <button type="button" class="close" ng-click="refresh_page()" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                                </div>
+                                <!--Body-->
+                                <form name="myEditForm"  novalidate>
+                                    <div class="modal-body">
+                                        <div class="font14 iotaddconfig">
+
+                                            <div ng-show="submitFailed" class="errorLogin">
+                                                <span class="error"> {{formError}} </span>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="sensor_detail_modal_edit1">Asset ID:<span class="color7">*</span> </label>
+                                                <input type="text" class="form-control" id="asset_detail_modal_edit9" ng-model="a.assetId" placeholder="Asset ID" readonly="true">
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="sensor_detail_modal_edit1">Sensor ID:<span class="color7">*</span> </label>
+                                                <input type="text" class="form-control" id="sensor_detail_modal_edit1" ng-model="a.sensorId" placeholder="Sensor ID" readonly="true">
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="sensor_detail_modal_edit2">Sensor Name:<span class="color7">*</span></label>
+                                                <input type="text" class="form-control" id="sensor_detail_modal_edit2"  required="required" placeholder="Sensor Name" maxlength="40" value="{{a.sensorsName}}">
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="sensor_detail_modal_edit3" class="descp">Sensor Description:</label>
+                                                <textarea class="form-control" rows="3" id="sensor_detail_modal_edit3"  placeholder="Sensor Description" maxlength="100">{{a.sensorDescription}}</textarea>
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="sensor_detail_modal_edit4">Sensor Type:<span class="color7">*</span></label>
+                                                <input type="text" class="form-control" id="sensor_detail_modal_edit4"  required="required" placeholder="Sensor Type" maxlength="20" value="{{a.sensorDatatype}}">
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="sensor_detail_modal_edit5">Sensor Serial Number:<span class="color7">*</span></label>
+                                                <input type="text" class="form-control" id="sensor_detail_modal_edit5"  required="required" placeholder="Sensor Serial Number" maxlength="70" value="{{a.sensorSerialNumber}}">
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="sensor_detail_modal_edit6">Sensor Tag:<span class="color7">*</span></label>
+                                                <input type="text" class="form-control" id="sensor_detail_modal_edit6"  required="required" placeholder="Sensor Tag" maxlength="50" value="{{a.sensorTag}}">
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <!-- <div class="form-group">
+<label for="sensor_detail_modal_edit6">Link to Asset:</label>
+  <select  id="sensor_detail_modal_edit6" class="form-control" ng-model="a.assetId">
+   <option value="" hidden>Select Asset</option>
+  <option ng-repeat="sensor_json_data in  sensor_details">{{sensor_json_data.assetId}}</option>
+  </select>
+   <div class="clear"></div>
+  </div> -->
+
+
+                                            <!--Footer-->
+                                            <div class="form-group">
+                                                <label>&nbsp;</label>
+                                                <button type="button" class="btn btn-secondary cancel" data-dismiss="modal" ng-click="refresh_page()">Cancel</button>
+                                                <button type="submit" class="btn btn-primary add" data-target="#centralModalSuccess_for_edit" data-whatever="@mdo" ng-disabled="myEditForm.$invalid"
+                                                    ng-click="pass_edited_data(a)">Update</button>
+                                                <div class="clear"></div>
+                                            </div>
+
+                                        </div>
+                                        <!--/.Content-->
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Central Modal Medium for update Success -->
+                    <div class="modal fade" id="centralModalSuccess_for_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog-msg modal-notify modal-success" role="document">
+                            <!--Content-->
+                            <div class="modal-content">
+                                <!--Header-->
+                                <!--  <div class="modal-header">
+                <p class="heading lead">Modal Success</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+            -->
+
+                                <!--Body-->
+                                <div class="modal-body">
+                                    <div class="text-center">
+                                        <i class="fa fa-check-circle fa-4x mb-3 animated color14"></i>
+                                        <!--<i class="fa fa-check-circle" ></i> -->
+                                        <p class="font16 successmsg">Sensor Updated Successfully.</p>
+                                    </div>
+                                </div>
+
+                                <!--Footer-->
+                                <div class="okbtn">
+                                    <!-- <a type="button" class="btn btn-primary-modal">Get it now <i class="fa fa-diamond ml-1"></i></a> -->
+                                    <a type="button" class="btn" data-dismiss="modal" ng-click=" reloadPage()">Ok</a>
+                                </div>
+                            </div>
+                            <!--/.Content-->
+                        </div>
+                    </div>
+                    <!-- Central Modal Medium Success-->
+
+
+                    <div class="modal fade" id="model_for_confirm_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog-msg modal-notify modal-success" role="document">
+                            <!--Content-->
+                            <div class="modal-content">
+                                <!--Header-->
+                                <!--  <div class="modal-header">
+                <p class="heading lead">Modal Success</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+            -->
+
+                                <!--Body-->
+                                <div class="modal-body">
+                                    <div class="text-center">
+                                        <i class="fa  fa-trash-o font32 color7 trash "></i>
+                                        <!--<i class="fa fa-check-circle" ></i> -->
+                                        <p class="font16 successmsg">Are you sure want to delete {{sensor_name_for_delete}}</p>
+                                    </div>
+                                </div>
+
+                                <!--Footer-->
+                                <div class="form-group textcenter">
+                                    <!-- <a type="button" class="btn btn-primary-modal">Get it now <i class="fa fa-diamond ml-1"></i></a> -->
+                                    <a type="submit" class="btn btn-primary no" data-dismiss="modal">No</a>
+                                    <a type="submit" class="btn btn-primary yes" data-target="#centralModalSuccess_for_delete" data-whatever="@mdo" data-toggle="modal"
+                                        data-dismiss="modal" ng-click="delete_button()">Yes</a>
+                                    <div class="clear"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Central Modal Medium Success-->
+
+
+                     <!-- Central Modal Medium for update Success -->
+                    <div class="modal fade" id="centralModalSuccess_for_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog-msg modal-notify modal-success" role="document">
+                            <!--Content-->
+                            <div class="modal-content">
+                                <!--Header-->
+                                <!--  <div class="modal-header">
+                <p class="heading lead">Modal Success</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+            -->
+
+                                <!--Body-->
+                                <div class="modal-body">
+                                    <div class="text-center">
+                                        <i class="fa fa-check-circle fa-4x mb-3 animated rotateIn color14"></i>
+                                        <!--<i class="fa fa-check-circle" ></i> -->
+                                        <p class="font16 successmsg">{{sensor_name_for_delete}} Inactivated Successfully.</p>
+                                    </div>
+                                </div>
+
+                                <!--Footer-->
+                                <div class="okbtn">
+                                    <a type="button" class="btn" data-dismiss="modal" ng-click=" reloadPage()">Ok</a>
+                                </div>
+                            </div>
+                            <!--/.Content-->
+                        </div>
+                    </div>
+                    <!-- Central Modal Medium Success-->
+                    <!-- Central Modal Medium for update Success -->
+                    <div class="modal fade" id="centralModalSuccess_for_delete_active" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog-msg modal-notify modal-success" role="document">
+                            <!--Content-->
+                            <div class="modal-content">
+                                <!--Header-->
+                                <!--  <div class="modal-header">
+                <p class="heading lead">Modal Success</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+            -->
+
+                                <!--Body-->
+                                <div class="modal-body">
+                                    <div class="text-center">
+                                        <i class="fa fa-check-circle fa-4x mb-3 animated rotateIn color14"></i>
+                                        <!--<i class="fa fa-check-circle" ></i> -->
+                                        <p class="font16 successmsg">{{sensor_name_for_delete_false}} Activated Successfully.</p>
+                                    </div>
+                                </div>
+
+                                <!--Footer-->
+                                <div class="okbtn">
+                                    <a type="button" class="btn" data-dismiss="modal" ng-click=" reloadPage()">Ok</a>
+                                </div>
+                            </div>
+                            <!--/.Content-->
+                        </div>
+                    </div>
+                    <!-- Central Modal Medium Success-->
+                </div>
+                <div class="table-responsive marginTS">
+                    <table id="j_table" datatable="ng" class="display font14" style="background-color:#fff !important;" cellspacing="0" width="100%">
+
+
+                        <thead>
+
+                         <tr class="css_for_th font22">
+                                   <td colspan="10" >ALL SENSORS</td>
+
+                                </tr>
+                            <tr>
+                                <th>Date</th>
+                                <th>Sensor ID</th>
+                                <th>Asset ID</th>
+                                <th>Sensor Data Type</th>
+                                <th>Sensor Name</th>
+                                <th>Sensor Serial Number</th>
+                                <th>Sensor Tag</th>
+                                <th>Sensor Description</th>
+                                <th>Status</th>
+
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr  ng-repeat="sensor_json_data in  sensor_details  | filter:search_by_text | filter:{sensorId: selected_sensor_id.sensorId}  | filter:{sensorsName: selected_sensor_name.sensorsName} | filter:{sensorDescription: selected_sensor_descrip.sensorDescription}">
+                                <td>{{sensor_json_data.createdDate | date:'MM-dd-yyyy'}}</td>
+                                <td>{{sensor_json_data.sensorId}}</td>
+                                <td ng-if="projectadminflag">{{sensor_json_data.asset.assetId}}</td>
+                                <td ng-if="otheradminflag">{{sensor_json_data.assetId}}</td>
+                                <td>{{sensor_json_data.sensorDatatype}}</td>
+                                <td>{{sensor_json_data.sensorsName}}</td>
+                                <td>{{sensor_json_data.sensorSerialNumber}}</td>
+                                <td>{{sensor_json_data.sensorTag}}</td>
+                                <td>{{sensor_json_data.sensorDescription}}</td>
+                                <td>
+                                    <div ng-if="sensor_json_data.active" class="color13">{{sensor_json_data.active?'Active':''}}</div>
+                                    <div ng-if!"sensor_json_data.active" class="cri">{{sensor_json_data.active?'':'InActive'}}</div>
+                                    
+                                </td>
+                                 
+                                <td>
+                                   <div  class="floatR  toggle-margin">
+                                        <div >
+                                            <span style="padding:2px 7px 0  0;" data-toggle="modal" data-target="#centralModalSm_for_editsensor" ng-click="edit_button(sensor_json_data)"
+                                                data-backdrop="static" data-keyboard="false"> <i class="fa  fa-edit font25 color14 edit " ></i> </span>
+                                            <!--  <span ng-click="delete_button1(sensor_json_data)"><i class="fa  fa-trash-o font25 color7 trash" data-target="#model_for_confirm_delete" data-toggle="modal" data-backdrop="static" data-keyboard="false"  ></i></span>-->
+                                        </div>
+                                        <div >
+                                            <button ng-if="sensor_json_data.active == true" type="button" ng-click="delete_button(sensor_json_data);" class="btn btn-sm btn-secondary btn-toggle active trash "
+                                                data-toggle="button" aria-pressed="true" autocomplete="off">
+											<div class="handle"></div>
+
+										</button>
+
+                                            <button ng-if="sensor_json_data.active == false" type="button" id="sensorToggle" ng-click="delete_button_false(sensor_json_data)"
+                                                class="btn btn-sm btn-secondary btn-toggle  " data-toggle="button" aria-pressed="true"
+                                                autocomplete="off">
+											<div class="handle"></div>
+
+										</button>
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<!-- /#page-content-wrapper -->
+<div ng-include="'templates/footer.html'"></div>
+</div>

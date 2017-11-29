@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.atos</groupId>
+    <artifactId>Codex-IOT</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>Codex-IOT-web</artifactId>
+  <packaging>war</packaging>
+  <name>Codex-IOT-web</name>
+  <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<project.root.directory>${basedir}/..</project.root.directory>
+	</properties>
+	
+	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	
+	</dependencies>
+ 
+  <build>
+    <finalName>Codex-IOT-web</finalName>
+  
+    <plugins>
+			<plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <compilerArgument>-Xlint:all</compilerArgument>
+                        <showWarnings>true</showWarnings>
+                        <showDeprecation>true</showDeprecation>
+                    </configuration>
+            </plugin>
+ 
+            <plugin>
+        		<artifactId>maven-antrun-plugin</artifactId>
+		        <executions>
+		
+		          <!-- Deploy application in an exploded fashion. -->
+		          <execution>
+		            <id>deploy-app-to-server</id>
+		            <phase>pre-integration-test</phase>
+		            <goals>
+		              <goal>run</goal>
+		            </goals>
+		            <configuration>
+		
+		             <target>
+						  <copy file="${basedir}/../Codex-IOT-web/target/Codex-IOT-web.war" tofile="${basedir}/../Codex-IOT-server/target/apache-tomcat-8.0.32/webapps/Codex-IOT-web.war" />	
+		             </target>
+		                
+		            </configuration>
+		          </execution>
+		        </executions>
+     	 	</plugin>
+     	 	
+     	 	<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+            
+		</plugins>
+  </build>
+</project>

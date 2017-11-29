@@ -1,0 +1,500 @@
+<div ng-include="'templates/header.html'" ng-init="asset_detail()">
+</div>
+<div id="page-content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-title color1 font27">Asset Configuration</div>
+
+                <!-- seelect tag start from here -->
+
+                <div class="textcenter">
+                    <div class="select_join font14">
+                        <!--    Select Asset by : <select name="select_part" id="mySelect" ng-model="selected_asset_id" ng-options="asset as asset.assetId for asset in asset_details">  <option value="" hidden>ID</option> <option Value="project.projectId"></option> -->
+                        <!--                 </select> -->
+
+                        <!--             <select name="select_part" id="mySelect" ng-model="selected_asset_name" ng-options="asset as asset.assetName for asset in asset_details"><option Value="" hidden>NAME</option> -->
+                        <!--                 </select> -->
+
+                        <!--             <select name="select_part" id="mySelect" ng-model="selected_asset_ip_address" ng-options="asset as asset.assetIpAddress for asset in asset_details"><option Value="" hidden>IP ADDRESS</option> -->
+                        <!--                 </select> -->
+                    </div>
+                    <div class="height20"></div>
+                </div>
+
+
+                <!-- select tag end here -->
+
+
+
+                <!-- table content from here -->
+
+
+
+
+                <div id="table-part">
+                    <script>
+                        $(document).ready(function () {
+                            $('#j_table').DataTable({
+                                "bLengthChange": false
+                            });
+                        });
+                    </script>
+
+
+                    <div>
+                        <div class="floatL">
+                            <button class="btn btn-primary addasset" data-toggle="modal" data-target="#centralModalSm_for_addasset" data-whatever="@mdo"
+                                ng-init="asset_detail()" data-backdrop="static" data-keyboard="false"> + Add Asset</button></div>
+                        <div class="wrap floatR" class="search_bar">
+                            <!-- <div class="iotsearch bgcolorWht">
+				<span class="iotsearchicon"><i class="fa fa-search color2"></i></span><input type="text" ng-model="search_by_text" class="iotsearchinput font14" placeholder="search Asset">
+				
+			</div> -->
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <br>
+
+                    <!-- Central Modal for add_project -->
+
+                    <div class="modal fade" id="centralModalSm_for_addasset" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true "
+                        ng-controller="asset_controller" ng-init="project_detail()">
+                        <div class="modal-dialog" role="document">
+                            <!--Content-->
+                            <div class="modal-content">
+                                <!--Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title font22 color9" id="myModalLabel">Add Asset</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="reset_form()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                                </div>
+                                <!--Body-->
+                                <form name="myForm" id="myForm" novalidate>
+                                    <div class="modal-body">
+                                        <div class="font14 iotaddconfig">
+
+                                            <div ng-show="submitFailed" class="errorLogin">
+                                                <span class="error"> {{addformError}} </span>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="assetId">Asset ID:<span class="color7">*</span> </label>
+                                                <input type="text" class="form-control" id="assetId" ng-model="assetId" placeholder="Asset ID" maxlength="30" required>                                                </input>
+                                                <div class="clear"></div>
+                                            </div>
+
+											<div class="form-group">
+                                                <label for="assetName">Asset Name:<span class="color7">*</span></label>
+                                                <input type="text" class="form-control" id="assetName" ng-model="assetName" placeholder="Asset Name" maxlength="40" required>                                                </input>
+                                                <div class="clear"></div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="assetDescription">Asset Description:</label>
+                                                <textarea type="text" rows="3" class="form-control" id="assetDescription" ng-model="assetDescription" placeholder="Asset Description" maxlength="100"> </textarea>
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="assetIpAddress">Asset  IP Address:<span class="color7">*</span></label>
+                                                <input type="text" class="form-control" id="assetIpAddress" ng-model="assetIpAddress" placeholder="Asset  IP Address" required>                                                </input>
+                                                <div class="clear"></div>
+                                            </div>
+
+
+
+                                            <div class="form-group">
+                                                <label for="assetProtocol">Asset  Protocol:<span class="color7">*</span></label>
+                                                <input type="text" class="form-control" id="assetProtocol" ng-model="assetProtocol" placeholder="Asset Protocol" maxlength="30" required>                                                </input>
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="assetSerialNumber">Asset  Serial Number:<span class="color7">*</span></label>
+                                                <input type="text" class="form-control" id="assetSerialNumber" ng-model="assetSerialNumber" placeholder="Asset Serial Number" maxlength="70" required> </input>
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="linkProject">Link to Project:<span class="color7">*</span></label>
+                                                <select id="projectId" class="form-control" ng-model="projectId" required>
+  <option value=""  hidden>Select Project</option>
+  <option ng-repeat="asset_json_data in  project_details">{{asset_json_data.projectId}}</option>
+  </select>
+                                            </div>
+
+
+      
+                                            <div class="form-group">
+                                                <label>&nbsp;</label>
+                                                <button type="button" class="btn btn-secondary cancel" data-dismiss="modal" ng-click="reset_form()">Cancel</button>
+                                                <button type="submit" class="btn btn-primary add" data-target="#centralModalSuccess_for_add" data-whatever="@mdo" ng-disabled="myForm.$invalid"
+                                                    ng-click=" pass_data()">Add</button>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                        <!--/.Content-->
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+
+                    <!-- Central Modal Medium Success -->
+                    <div class="modal fade" id="centralModalSuccess_for_add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog-msg modal-notify modal-success" role="document">
+                            <!--Content-->
+                            <div class="modal-content">
+                                <!--Header-->
+                                <!--  <div class="modal-header">
+                <p class="heading lead">Modal Success</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+            -->
+
+                                <!--Body-->
+                                <div class="modal-body">
+                                    <div class="text-center">
+                                        <i class="fa fa-check-circle fa-4x mb-3 animated color14"></i>
+                                        <!--<i class="fa fa-check-circle" ></i> -->
+                                        <p class="font16 successmsg">Asset Added Successfully.</p>
+                                    </div>
+                                </div>
+
+                                <!--Footer-->
+                                <div class="okbtn">
+                                    <!-- <a type="button" class="btn btn-primary-modal">Get it now <i class="fa fa-diamond ml-1"></i></a> -->
+                                    <a type="button" class="btn" data-dismiss="modal" ng-click=" reloadPage()">Ok</a>
+                                </div>
+                            </div>
+                            <!--/.Content-->
+                        </div>
+                    </div>
+                    <!-- Central Modal Medium Success-->
+
+
+
+
+                    <!-- Central Modal for Edit_project -->
+
+                    <div class="modal fade" id="centralModalSm_for_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true ">
+                        <div class="modal-dialog" role="document">
+                            <!--Content-->
+
+                            <div class="modal-content">
+                                <!--Header-->
+                                <div class="modal-header">
+                                    <h4 class="modal-title font22 color9" id="myModalLabel">Edit Asset </h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="refresh_modal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                                </div>
+                                <!--Body-->
+
+                                <form name="myFormEdit" novalidate>
+
+
+                                    <div class="modal-body">
+                                        <div class="font14 iotaddconfig">
+
+                                            <div ng-show="submitFailed" class="errorLogin">
+                                                <span class="error"> {{formError}} </span>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="asset_edited_id"> Asset ID:<span class="color7">*</span></label>
+                                                <input type="text" class="form-control" id="asset_edited_id"  disabled required="required"  value="{{a.assetId}}">
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="asset_edited_id"> Linked Project ID:<span class="color7">*</span></label>
+                                                <input type="text" class="form-control" id="project_edited_id"  disabled required="required"  value="{{a.projectId}}" >
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="asset_edited_description">Asset Description:</label>
+                                                <textarea class="form-control" rows="3" id="asset_edited_description"  required="required" maxlength="100"> {{a.assetDesc}}</textarea>
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="asset_edited_ip_address">Asset IP Address:<span class="color7">*</span></label>
+                                                <input type="text" class="form-control" id="asset_edited_ip_address"  required="required"  value="{{a.assetIpAddress}}">
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="asset_edited_name">Asset Name:<span class="color7">*</span></label>
+                                                <input type="text" class="form-control" id="asset_edited_name" required="required" maxlength="40"  value="{{a.assetName}}">
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="asset_edited_protocol">Asset Protocol:<span class="color7">*</span></label>
+                                                <input type="text" class="form-control" id="asset_edited_protocol"  required="required" maxlength="30" value="{{a.assetProtocol}}">
+                                                <div class="clear"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="asset_edited_serial_number">Asset Serial Number:<span class="color7">*</span></label>
+                                                <input type="text" class="form-control" id="asset_edited_serial_number"  required="required" maxlength="70" value="{{a.assetSerialNumber}}">
+                                                <div class="clear"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>&nbsp;</label>
+                                                <button type="button" class="btn btn-secondary cancel" data-dismiss="modal" ng-click="refresh_modal()">Cancel</button>
+                                                <button type="submit" class="btn btn-primary add" data-target="#centralModalSuccess" data-whatever="@mdo" ng-click="pass_edited_data(a)">Update</button>
+                                                <div class="clear"></div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <!--/.Content-->
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+
+                    <!-- Central Modal Medium for update Success -->
+                    <div class="modal fade" id="centralModalSuccess_for_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog-msg modal-notify modal-success" role="document">
+                            <!--     Content -->
+                            <div class="modal-content">
+                                <!--     Header -->
+                                <!--  <div class="modal-header">
+                <p class="heading lead">Modal Success</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div> -->
+
+
+                                <!--   Body -->
+                                <div class="modal-body">
+                                    <div class="text-center">
+                                        <i class="fa fa-check-circle fa-4x mb-3 animated color14"></i>
+                                        <p class="font16 successmsg">Asset Updated Successfully.</p>
+                                    </div>
+                                </div>
+
+                                <!--  Footer -->
+                                <div class="okbtn">
+                                    <!--  <a type="button" class="btn btn-primary-modal">Get it now <i class="fa fa-diamond ml-1"></i></a> -->
+                                    <a type="button" class="btn" data-dismiss="modal" ng-click="reloadPage()">Ok</a>
+                                </div>
+                            </div>
+                            <!-- /.Content -->
+                        </div>
+                    </div>
+                    <!-- Central Modal Medium Success-->
+
+
+
+
+                    <div class="modal fade" id="model_for_confirm_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog-msg modal-notify modal-success" role="document">
+                            <!--Content-->
+                            <div class="modal-content">
+                                <!--Header-->
+                                <!--  <div class="modal-header">
+                <p class="heading lead">Modal Success</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+            -->
+
+                                <!--Body-->
+                                <div class="modal-body">
+                                    <div class="text-center">
+                                        <i class="fa  fa-trash-o font32 color7 trash "></i>
+                                        <!--<i class="fa fa-check-circle" ></i> -->
+                                        <p class="font16 successmsg">Are you sure want to delete {{asset_name_for_delete}}</p>
+                                    </div>
+                                </div>
+
+                                <!--Footer-->
+                                <div class="form-group textcenter">
+                                    <!-- <a type="button" class="btn btn-primary-modal">Get it now <i class="fa fa-diamond ml-1"></i></a> -->
+                                    <a type="submit" class="btn btn-secondary no" data-dismiss="modal">No</a>
+                                    <a type="submit" class="btn btn-primary yes" data-dismiss="modal" ng-click="delete_button()" data-whatever="@mdo" data-toggle="modal"
+                                        data-target="#centralModalSuccess_for_asset_delete">Yes</a>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                            <!--/.Content-->
+                        </div>
+                    </div>
+                    <!-- Central Modal Medium Success-->
+                    <!-- <div class="bgcolortblylw color4 font16 tablemainhdr">ALL ASSETS</div> -->
+                    <div class="modal fade" id="centralModalSuccess_for_asset_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog-msg modal-notify modal-success" role="document">
+                            <!--Content-->
+                            <div class="modal-content">
+                                <!--Header-->
+                                <!--  <div class="modal-header">
+                <p class="heading lead">Modal Success</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+            -->
+
+                                <!--Body-->
+                                <div class="modal-body">
+                                    <div class="text-center">
+                                        <i class="fa fa-check-circle fa-4x mb-3 color14 animated rotateIn"></i>
+                                        <!--<i class="fa fa-check-circle" ></i> -->
+                                        <p class="font16 successmsg">{{asset_name_for_delete}} Inactivated Successfully.</p>
+                                    </div>
+                                </div>
+
+                                <!--Footer-->
+                                <div class="okbtn">
+                                    <a type="button" class="btn" data-dismiss="modal" ng-click=" reloadPage()">Ok</a>
+                                </div>
+                            </div>
+                            <!--/.Content-->
+                        </div>
+                    </div>
+                    <!-- Central Modal Medium Success-->
+
+                    <!-- Central Modal Medium Success-->
+                    <!-- <div class="bgcolortblylw color4 font16 tablemainhdr">ALL ASSETS</div> -->
+                    <div class="modal fade" id="centralModalSuccess_for_asset_delete_false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog-msg modal-notify modal-success" role="document">
+                            <!--Content-->
+                            <div class="modal-content">
+                                <!--Header-->
+                                <!--  <div class="modal-header">
+                <p class="heading lead">Modal Success</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+            -->
+
+                                <!--Body-->
+                                <div class="modal-body">
+                                    <div class="text-center">
+                                        <i class="fa fa-check-circle fa-4x mb-3 color14 animated rotateIn"></i>
+                                        <!--<i class="fa fa-check-circle" ></i> -->
+                                        <p class="font16 successmsg">{{asset_name_for_delete_false}} Activated Successfully.</p>
+                                    </div>
+                                </div>
+
+                                <!--Footer-->
+                                <div class="okbtn">
+                                    <a type="button" class="btn" data-dismiss="modal" ng-click=" reloadPage()">Ok</a>
+                                </div>
+                            </div>
+                            <!--/.Content-->
+                        </div>
+                    </div>
+                    <!-- Central Modal Medium Success-->
+
+
+                    <div class="table-responsive marginTS">
+                        <table id="j_table" datatable="ng" class="display font14" style="background-color:#fff !important;" cellspacing="0" width="100%">
+
+
+                            <thead>
+
+
+                                <tr class="css_for_th font22">
+                                    <td colspan="10">ALL ASSETS</td>
+
+                                </tr>
+
+
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Asset ID</th>
+
+                                    <th>Asset Name</th>
+                                    <th>Asset IP Address</th>
+                                    <th>Asset Description</th>
+
+                                    <th>Protocol</th>
+                                    <th>Status</th>
+                                    <th>Linked Project ID</th>
+                                    <th>Serial Number</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr ng-repeat="asset_json_data in  asset_details | filter:search_by_text | filter:{assetId: selected_asset_id.assetId}  | filter:{assetName: selected_asset_name.assetName} | filter:{assetIpAddress: selected_asset_ip_address.assetIpAddress} ">
+                                     	<td>{{asset_json_data.createdDate | date:'MM-dd-yyyy'}}</td> 
+                                    <td>{{asset_json_data.assetId}}</td>
+
+                                    <td>{{asset_json_data.assetName}}</td>
+                                    <td>{{asset_json_data.assetIpAddress}}</td>
+                                    <td class="wordbreak">{{asset_json_data.assetDesc}}</td>
+                                    <td>{{asset_json_data.assetProtocol}}</td>
+                                    <td>
+                                        <div ng-if="asset_json_data.active" class="color13">{{asset_json_data.active?'Active':''}}</div>
+                                        <div ng-if! "asset_json_data.active" class="color7">{{asset_json_data.active?'':'Inactive'}}</div>
+
+                                    </td>
+
+                                    <td ng-if="projectadminflag">{{asset_json_data.project.projectId}}</td>
+                                    <td ng-if="otheradminflag">{{asset_json_data.projectId}}</td>
+                                    <td>{{asset_json_data.assetSerialNumber}}</td>
+                                    <td>
+                                        <div>
+                                            <span style="padding:2px 7px 0  0;" data-toggle="modal" data-target="#centralModalSm_for_edit" ng-click="edit_button(asset_json_data)"
+                                                data-backdrop="static" data-keyboard="false"> <i class="fa  fa-edit font25 color14 edit" ></i> </span>
+                                            <!--  <span ng-click="delete_button1(asset_json_data)"><i class="fa  fa-trash-o font25 color7 trash" data-target="#model_for_confirm_delete" data-backdrop="static" data-keyboard="false" data-toggle="modal"  ></i></span>-->
+                                            <button ng-if="asset_json_data.active == true" type="button" ng-click="delete_button(asset_json_data);" class="btn btn-sm btn-secondary btn-toggle active"
+                                                data-toggle="button" aria-pressed="true" autocomplete="off">
+											<div class="handle">
+
+										</button>
+
+                                            <button ng-if="asset_json_data.active == false" type="button" id="sensorToggle" ng-click="delete_button_false(asset_json_data)"
+                                                class="btn btn-sm btn-secondary btn-toggle" data-toggle="button" aria-pressed="true"
+                                                autocomplete="off" data-backdrop="static" data-keyboard="false">
+											<div class="handle"></div>
+
+										</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- table content end here -->
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <br>
+    <!-- /#page-content-wrapper -->
+    <div ng-include="'templates/footer.html'"></div>
+</div>
+

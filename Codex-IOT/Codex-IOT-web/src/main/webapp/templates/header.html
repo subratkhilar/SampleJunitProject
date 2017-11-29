@@ -1,0 +1,132 @@
+<div ng-controller="sidebarCtrl">
+<nav class="navbar navbar-default no-margin">
+    <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header fixed-brand">
+                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" id="menu-toggle">
+                      <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                    </button>
+                          
+                </div><!-- navbar-header-->
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li class="active" >
+                                <button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> 
+                                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                                </button>
+                                </li>
+                            </ul>
+                           
+                            <a href="#/welcome" title="Atos"><img class="atos-img-responsive" src="image/atos-logo.png" alt="Atos"></a>
+                             
+                             <a href="#/welcome"><img class="iot-img-responsive" src="image/iot-logo.png" alt="IoT"></a> 
+                           
+														
+								<div class="cursor pull-right iottooltip">
+      <ul class="nav navbar-nav navbar-right" ng-click="userFunction()">
+        <li class="dropdown">
+          <a class="dropdown-toggle headnotification" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-power-off color4 headnotifont"></i></a>
+          <ul class="dropdown-menu notify-drop1">
+            <div class="notify-drop-title">            	
+            		<div class="popuptextlogout notification font14" id="userPopup" ng-controller="LoginCtrl" ng-click="logout()">Logout</div>
+            		
+            	
+            </div>
+            <!-- end notify title -->
+          </ul>
+        </li>
+      </ul>
+	   <ul class="nav navbar-nav navbar-right" ng-click="myFunction()" ng-controller="mapController">
+        <li class="dropdown">
+          <a class="dropdown-toggle headnotification" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell color4 headnotifont"><span class="w3-badge w3-red">{{alertCount}}</span></i></a>
+          <ul class="dropdown-menu notify-drop">
+            <div class="notify-drop-title">            	
+            		<div class="" id="myPopup">
+					<li ng-repeat="x in chk track by $index">                            	
+							        	<div class="notification font14">{{x}}</div>
+                            	</li>
+					</div>
+            		
+            	
+            </div>
+            <!-- end notify title -->
+          </ul>
+        </li>
+      </ul>
+    </div>
+							<!--<div class="popup pull-right" ng-click="userFunction()">
+                            	 <a class="headnotification"><i class="fa fa-power-off color4 headnotifont"></i></a>                 
+                         		<span class="popuptextlogout notification font14" id="userPopup"  ng-controller="LoginCtrl" ng-click="logout()"> Logout</span>                         		
+                            	 </div>	 								 
+								 
+								 <div class="popup pull-right" ng-click="myFunction()" ng-controller="mapController">
+                            	 <a class="headnotification"><i class="fa fa-bell color4 headnotifont"><span class="w3-badge w3-red">{{alertCount}}</span></i></a>
+                            	 <span class="popuptext notificationlist" id="myPopup">
+                            	 
+       <ul>
+								 <li ng-repeat="x in chk track by $index">                            	
+							        	<div class="notification font14">{{x}}</div>
+                            	</li>
+								</ul>
+                            	 </span>
+                            	  </div>-->	
+                            	 
+                            	 </div>	
+                          
+                            	 
+                            	 
+                            	 
+                            	 
+                    
+                 <!-- bs-example-navbar-collapse-1 -->
+    </nav>
+    	
+<div id="wrapper">
+    
+		<div id="sidebar-wrapper">		
+		
+            <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+
+                <li ng-class="{active:isActive('/welcome')}">
+                    <a href="#/welcome"><span class="fa-stack fa-lg pull-left"><i class="fa fa-dashboard fa-stack-1x "></i></span> Dashboard</a>
+                </li>
+               
+               <li ng-class="{active:isActive('/graph')}">
+                    <a href="#/graph"><span class="fa-stack fa-lg pull-left"><i class="fa fa-bar-chart  fa-stack-1x "></i></span>Reports</a>
+                </li>
+               
+        
+             
+               <li ng-class="[{active:isActive('/project_config')}, {active:isActive('/asset_config')}, {active:isActive('/sensor_config')}]" id="settingsId">
+                    <a href="#welcome" id="setting"><span class="fa-stack fa-lg pull-left"><i class="fa fa-cogs fa-stack-1x "></i></span> Settings<span class="fa-stack fa-lg pull-right"><i class="fa fa-caret-down fa-stack-1x "></i></span></a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        
+                        
+                        <li ng-class="{active:isActive('/project_config')}" class="noborder" id="projectConfig">
+                    	<a href="#/project_config"> <span class="fa-stack fa-lg pull-left"><i class="fa fa-cubes fa-stack-1x "></i></span>Project Configuration</a>
+                		</li>
+						
+                		
+               
+                        <li ng-class="{active:isActive('/asset_config')}" class="noborder">
+          
+                   		 <a href="#/asset_config"><span class="fa-stack fa-lg pull-left"><i class="fa fa-mobile fa-stack-1x "></i></span>Asset Configuration</a>
+                		</li>
+               
+                        <li ng-class="{active:isActive('/sensor_config')}" class="noborder">
+                		
+                    	<a href="#/sensor_config"><span class="fa-stack fa-lg pull-left"><i class="fa fa-compass fa-stack-1x "></i></span>Sensor Configuration</a>
+                		</li>
+                    </ul>
+                </li>
+        
+                  <li ng-class="{active:isActive('/workflow_config')}" id="workflow">
+                    <a href="#/workflow_config"><span class="fa-stack fa-lg pull-left"><i class="fa fa-sitemap  fa-stack-1x "></i></span>Configure Worlflow</a>
+                </li>
+               
+                
+             </ul>
+             </div>
+             
+            </div> 
+        </div> 
