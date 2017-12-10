@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
- * @author A666395 This class for run the SpringBootWebApplication
+ * @author A666395 This class for run the SpringBootWebApplicationtest
  *
  */
 

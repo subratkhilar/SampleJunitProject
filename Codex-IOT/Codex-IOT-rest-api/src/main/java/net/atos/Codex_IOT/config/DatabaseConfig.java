@@ -17,7 +17,8 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * @author A666395 This is for database configuration
+ * @author A666395 This is for database configuration 
+ * This file is used for database configuration
  *
  */
 @Configuration
